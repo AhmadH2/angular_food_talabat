@@ -1,0 +1,73 @@
+
+<div class="container">
+    <form (ngSubmit)="onSubmit()" #addForm="ngForm" class="col-6">
+        <h2>Add Restaurant</h2>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input required minlength="4" maxlength="40" pattern="[a-zA-Z\d.-]*" [(ngModel)]="model.name" 
+            name="name" type="text" class="form-control" id="name" #name="ngModel">
+
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+            
+                <div *ngIf="name.errors.required">
+                    Name is required.
+                </div>
+                <div *ngIf="name.errors.minlength">
+                    Name must be at least 4 characters long.
+                </div>
+                <div *ngIf="name.errors.pattern">
+                    Name must contain only letters, digits, "." or "-"
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="city">City</label>
+            <select [(ngModel)]="model.city" name="city" id="city" class="form-control">
+                <option value="" *ngFor="let city of cities" [value]="city">{{city}}</option>
+            </select>
+
+        </div>
+
+        <div class="form-group">
+            <label for="street">Street</label>
+            <input required [(ngModel)]="model.street" name="street" type="text" class="form-control" id="street"
+                #street="ngModel">
+
+            <div *ngIf="street.touched">
+                <div [hidden]="street.valid" class="alert alert-danger">
+                    Street is required</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="latitude">Latitude</label>
+            <input pattern="[\d]*" [(ngModel)]="model.lat" name="latitude" type="text" class="form-control"
+                id="latitude" #latitude="ngModel">
+
+            <div [hidden]="latitude.valid" class="alert alert-danger">
+                Not match the pattern
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="longitude">Longitude</label>
+            <input pattern="[\d]*" [(ngModel)]="model.lng" name="longitude" type="text" class="form-control"
+                id="longitude" #longitude="ngModel">
+
+            <div [hidden]="longitude.valid" class="alert alert-danger">
+                Not match the pattern
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input [(ngModel)]="model.image" name="image" type="text" class="form-control" id="image" #image="ngModel">
+
+        </div>
+
+        <button class="btn btn-success" [disabled]="!addForm.form.valid" (click)="newRestaurant()">Submit</button>
+    </form>
+</div>

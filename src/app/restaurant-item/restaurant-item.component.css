@@ -1,0 +1,26 @@
+
+.row-btns{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.row-btns .btn{
+    width: 100px;
+}
+
+.content{
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-align: center;
+    justify-content: flex-end;
+    padding: 0px;
+    margin: 0%;
+}
+
+.card{
+    width: 400px;
+    margin-right: 20px;
+}

@@ -1,0 +1,23 @@
+
+<div class="card">
+    <div style="height: 500px">
+        <img class="card-img-top" [src]="restaurant.image" alt="Card image" style="height:100%">
+    </div>
+    <div class="card-img-overlay">
+        <div class="content">
+            <h4 class="card-title" style="color: white;">{{restaurant.name}}</h4>
+            <p style="color: white;">{{restaurant.city}}</p>
+            <i class="far fa-star"></i>
+            <p class="card-text" style="color: white;">
+                {{restaurant.street}}
+            </p>
+            <div class="row-btns">
+                <button class="btn btn-success">Edit</button>
+                <button class="btn btn-warning">Rate</button>
+                <button class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+        
+
+    </div>
+</div>
