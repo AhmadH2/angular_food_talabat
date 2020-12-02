@@ -1,31 +1,28 @@
-
 <div class="card">
     <div style="height: 450px">
-        <img class="card-img-top" [src]="restaurant.image" alt="Card image" style="height:100%">
+        <img class="card-img-top" [src]="menu.image" alt="Card image" style="height:100%">
     </div>
     <div class="card-img-overlay">
         <div class="content">
-            <h4 class="card-title" style="color: white;">{{restaurant.name}}</h4>
+            <h4 class="card-title" style="color: white;">{{menu.name}}</h4>
             <div>
                 <i *ngFor="let item of rating" class="fa fa-star" style="color: yellow;"></i>
             </div>
-            <p style="color: white;">{{restaurant.city}}</p>
+            <p style="color: white;">{{menu.descr}}</p>
             <p class="card-text" style="color: white;">
-                {{restaurant.street}}
+                {{menu.price}}
             </p>
-            <button class="btn btn-info">show menu items</button>
             <div class="row-btns">
-                <button class="btn btn-success" >Edit</button>
-                <button type="button" class="btn btn-warning" data-toggle="modal" 
-                data-target="#exampleModal" (click)="open(mymodal)">Rate</button>
-                <button class="btn btn-danger" (click)="deleteRest()">Delete</button>
+                <button type="button" class="btn btn-warning" data-toggle="modal"
+                 data-target="#exampleModal"(click)="open(mymodal)">Rate</button>
+                <button class="btn btn-info">Order</button>
             </div>
         </div>
-        
+
 
     </div>
 </div>
- 
+
 <ng-template #mymodal let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>

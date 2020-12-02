@@ -1,32 +1,32 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Menu } from '../menu';
 import { Restaurant } from '../restaurant';
 import { RestaurantService } from '../restaurant.service';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-restaurant-item',
-  templateUrl: './restaurant-item.component.html',
-  styleUrls: ['./restaurant-item.component.css']
+  selector: 'app-menu-item',
+  templateUrl: './menu-item.component.html',
+  styleUrls: ['./menu-item.component.css']
 })
-export class RestaurantItemComponent implements OnInit {
+export class MenuItemComponent implements OnInit {
 
   @Input()
-  restaurant: Restaurant;
+  menu: Menu;
   rating: number[] = [];
 
   closeResult: string;
 
-
   constructor(public restaurantService: RestaurantService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    for(let i=0; i<this.restaurant.rating; i++) {
+    for (let i = 0; i < this.menu.rating; i++) {
       this.rating.push(i);
     }
   }
 
-  deleteRest() {
-    this.restaurantService.deleteRestaurant(this.restaurant);
+  deleteMenu() {
+    this.restaurantService.deleteMenu(this.menu);
   }
 
   open(content) {
@@ -37,8 +37,8 @@ export class RestaurantItemComponent implements OnInit {
     });
   }
 
-  rate(rating:number) {
-    this.restaurantService.rateRestaurant(rating, this.restaurant);
+  rate(rating: number) {
+    this.restaurantService.rateMenu(rating, this.menu);
     this.modalService.dismissAll();
   }
 
@@ -51,7 +51,5 @@ export class RestaurantItemComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
-
 
 }
