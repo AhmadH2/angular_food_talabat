@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RestaurantService } from './restaurant.service';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  constructor() { };
+  isAdmin:boolean;
+
+  constructor(private restaurantService:RestaurantService) { 
+    this.isAdmin = this.restaurantService.isAdmin;
+  };
 
   ngOnInit(): void { };
   title = 'Talabat';
