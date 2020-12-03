@@ -1,7 +1,9 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Menu } from '../menu';
 import { RestaurantService } from '../restaurant.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-menus-list',
@@ -11,7 +13,8 @@ import { RestaurantService } from '../restaurant.service';
 export class MenusListComponent implements OnInit {
   menus: Menu[];
 
-  constructor(private restaurantService: RestaurantService, private route: ActivatedRoute,) { }
+  constructor(private restaurantService: RestaurantService, 
+    private route: ActivatedRoute, private location:Location) { }
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('rest_id');
@@ -19,6 +22,10 @@ export class MenusListComponent implements OnInit {
     // this.heroService.getHero(id)
       // .subscribe(hero => this.hero = hero);
     this.menus = this.restaurantService.getMenusById(id);
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }

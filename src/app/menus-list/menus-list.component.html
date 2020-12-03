@@ -1,5 +1,7 @@
 
 <div class="container">
+
+    <button class="btn btn-outline-success" (click)="goBack()">Go back</button>
     <div class="row">
         <app-menu-item *ngFor="let menu of menus" [menu]="menu"></app-menu-item>
     </div>

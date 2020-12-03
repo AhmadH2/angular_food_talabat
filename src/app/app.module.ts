@@ -12,6 +12,8 @@ import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenusListComponent } from './menus-list/menus-list.component';
 import { EditRestaurantComponent } from './edit-restaurant/edit-restaurant.component';
 import { EditMenuComponent } from './edit-menu/edit-menu.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 
 
@@ -26,6 +28,8 @@ import { EditMenuComponent } from './edit-menu/edit-menu.component';
     MenusListComponent,
     EditRestaurantComponent,
     EditMenuComponent,
+    PageNotFoundComponent,
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,
