@@ -15,8 +15,7 @@ import { EditMenuComponent } from './edit-menu/edit-menu.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { OrderedListComponent } from './ordered-list/ordered-list.component';
-
-
+import {AdminPanelComponent} from './admin-panel/admin-panel.component'
 
 @NgModule({
   declarations: [
@@ -32,6 +31,7 @@ import { OrderedListComponent } from './ordered-list/ordered-list.component';
     PageNotFoundComponent,
     NavBarComponent,
     OrderedListComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,

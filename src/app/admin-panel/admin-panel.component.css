@@ -1,0 +1,11 @@
+.main{
+    display: flex;
+    flex-direction: row;
+}
+
+.dash-link{
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}

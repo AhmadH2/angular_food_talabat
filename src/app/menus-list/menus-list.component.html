@@ -1,6 +1,11 @@
 
 <div class="container">
 
+    <p>Filter by</p>
+    <select name="" id="" (change)="filter($event.target.value)">
+        <option *ngFor="let item of ['Name', 'Rating']" value={{item}}>{{item}}</option>
+    
+    </select>
     <button class="btn btn-outline-success" (click)="goBack()">Go back</button>
     <div class="row" *ngIf="menus.length>0">
         <app-menu-item *ngFor="let menu of menus" [menu]="menu" [isOrdered]="false"></app-menu-item>

@@ -10,11 +10,16 @@ import { RestaurantService } from '../restaurant.service';
 export class RestaurantsListComponent implements OnInit {
 
   restaurants: Restaurant[];
+  filterMethod:string;
 
   constructor(public restaurantService: RestaurantService) { }
 
   ngOnInit(): void {
     this.restaurants = this.restaurantService.getRestaurants();
+  }
+
+  filter(value) {
+    this.restaurants = this.restaurantService.filterRest(value);
   }
 
 }

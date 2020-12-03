@@ -28,4 +28,8 @@ export class MenusListComponent implements OnInit {
     this.location.back();
   }
 
+  filter(value) {
+    this.menus = this.restaurantService.filterMenus(value);
+  }
+
 }
