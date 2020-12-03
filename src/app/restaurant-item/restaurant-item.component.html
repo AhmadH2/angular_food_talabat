@@ -13,15 +13,14 @@
             <p class="card-text" style="color: white;">
                 {{restaurant.street}}
             </p>
-            <button class="btn btn-info">show menu items</button>
+            <a routerLink="/menus/{{restaurant.id}}" routerLinkActive="active" class="btn btn-info">show menu items</a>
             <div class="row-btns">
-                <button class="btn btn-success" >Edit</button>
+                <app-edit-restaurant [restaurant]='restaurant'></app-edit-restaurant>
                 <button type="button" class="btn btn-warning" data-toggle="modal" 
                 data-target="#exampleModal" (click)="open(mymodal)">Rate</button>
                 <button class="btn btn-danger" (click)="deleteRest()">Delete</button>
             </div>
         </div>
-        
 
     </div>
 </div>

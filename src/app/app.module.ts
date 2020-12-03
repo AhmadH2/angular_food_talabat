@@ -10,6 +10,8 @@ import { AddMenuFormComponent } from './add-menu-form/add-menu-form.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenusListComponent } from './menus-list/menus-list.component';
+import { EditRestaurantComponent } from './edit-restaurant/edit-restaurant.component';
+import { EditMenuComponent } from './edit-menu/edit-menu.component';
 
 
 
@@ -22,6 +24,8 @@ import { MenusListComponent } from './menus-list/menus-list.component';
     AddMenuFormComponent,
     MenuItemComponent,
     MenusListComponent,
+    EditRestaurantComponent,
+    EditMenuComponent,
   ],
   imports: [
     BrowserModule,

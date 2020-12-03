@@ -13,6 +13,7 @@
                 {{menu.price}}
             </p>
             <div class="row-btns">
+                <app-edit-menu [menu]="menu"></app-edit-menu>
                 <button type="button" class="btn btn-warning" data-toggle="modal"
                  data-target="#exampleModal"(click)="open(mymodal)">Rate</button>
                 <button class="btn btn-info">Order</button>

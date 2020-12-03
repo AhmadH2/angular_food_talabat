@@ -1,0 +1,68 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Restaurant update</h4>
+        <button type="button" class="close" aria-label="Close" 
+        (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form style="padding: 20px;" (ngSubmit)="onSubmit()" #editMenuForm='ngForm'>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input required maxlength="50" type="input" name='name' [(ngModel)]="model.name" 
+                class="form-control" id="name" #_name="ngModel" value={{menu.name}}>
+
+                <div *ngIf='_name.touched && !_name.valid' class="alert alert-danger">
+                    <div *ngIf='_name.errors.required'>
+                        Name is required
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="restaurantName">Restaurant</label>
+                <select required [(ngModel)]="model.rest_id" name='restaurantName' 
+                type='select' id='restaurantName' class="form-control">
+                    <option value="" *ngFor="let r of rests" [value]="r.id">{{r.name}}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="descr">description</label>
+                <input required type="input" [(ngModel)]='model.descr' name='descr' class="form-control" id="descr"
+                    #_descr="ngModel">
+
+                <div *ngIf='_descr.touched && !_descr.valid && _descr.errors.required' class="alert alert-danger">
+                    description is required!
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input required type="input" [(ngModel)]='model.price' name='price' class="form-control" id="price"
+                    #_price="ngModel">
+
+                <div *ngIf='_price.touched && !_price.valid && _price.errors.required' class="alert alert-danger">
+                    Price is required!
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="img">Image</label>
+                <input [(ngModel)]='model.image' type="text" name='img' class="form-control" id="img" #_img="ngModel">
+            </div>
+
+            <button type="submit" class="btn btn-primary"
+                [disabled]="editMenuForm.form.invalid" >Save</button>
+        </form>
+
+
+
+    </div>
+    <!-- <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div> -->
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Edit</button>
