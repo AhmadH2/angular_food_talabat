@@ -21,10 +21,37 @@ export class RestaurantService {
       'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636', 7),
   ];
 
+  private orderedItems:Menu[] = [];
   constructor() { }
 
   getRestaurants(): Restaurant[] {
-    return this.restaurants;
+    return this.restaurants.sort((a,b) => (a.name > b.name)?1:-1);
+  }
+
+  getOrdered(): Menu[] {
+    return this.orderedItems;
+  }
+
+  isOrdered(menu: Menu): boolean {
+    if(this.orderedItems.indexOf(menu) != -1) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
+  orderItem(item:Menu) {
+    this.orderedItems.push(item);
+  }
+
+  deleteOrder(item:Menu) {
+    let index = this.orderedItems.indexOf(item);
+    this.orderedItems.splice(index, 1);
+  }
+
+  getRestName(rest_id:number):string{
+    return this.restaurants.filter((rest) => rest.id == rest_id)[0].name;
   }
 
   getMenusById(rest_id:number): Menu[] {

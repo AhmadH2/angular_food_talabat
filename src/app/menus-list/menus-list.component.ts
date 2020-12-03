@@ -14,7 +14,7 @@ export class MenusListComponent implements OnInit {
   menus: Menu[];
 
   constructor(private restaurantService: RestaurantService, 
-    private route: ActivatedRoute, private location:Location) { }
+    private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('rest_id');

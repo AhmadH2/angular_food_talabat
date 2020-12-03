@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AddMenuFormComponent } from './add-menu-form/add-menu-form.component';
 import { AddRestaurantFormComponent } from './add-restaurant-form/add-restaurant-form.component';
 import { MenusListComponent } from './menus-list/menus-list.component';
+import { OrderedListComponent } from './ordered-list/ordered-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RestaurantsListComponent } from './restaurants-list/restaurants-list.component';
 
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'restaurants', component: RestaurantsListComponent },
   { path: 'addRest', component: AddRestaurantFormComponent },
   { path: 'addMenu', component: AddMenuFormComponent },
+  { path: 'orders', component: OrderedListComponent },
   { path: '', redirectTo: '/restaurants', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 

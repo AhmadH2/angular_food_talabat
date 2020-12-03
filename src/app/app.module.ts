@@ -14,6 +14,7 @@ import { EditRestaurantComponent } from './edit-restaurant/edit-restaurant.compo
 import { EditMenuComponent } from './edit-menu/edit-menu.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { OrderedListComponent } from './ordered-list/ordered-list.component';
 
 
 
@@ -30,6 +31,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     EditMenuComponent,
     PageNotFoundComponent,
     NavBarComponent,
+    OrderedListComponent,
   ],
   imports: [
     BrowserModule,

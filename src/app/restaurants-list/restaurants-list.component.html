@@ -1,8 +1,11 @@
 
 <div class="container">
-    <div class="row">
+    <div class="row" *ngIf="restaurants.length>0">
         <app-restaurant-item *ngFor="let restaurant of restaurants"
          [restaurant]="restaurant"></app-restaurant-item>
+    </div>
+    <div *ngIf="restaurants.length==0">
+        There is NO any restaurants to show!!
     </div>
     
 </div>

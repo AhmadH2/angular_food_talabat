@@ -1,0 +1,16 @@
+
+
+<div class="container">
+
+    <h2>Total Price to Pay: ${{calcPrice()}}</h2>
+
+    <button class="btn btn-outline-success" (click)="goBack()">Go back</button>
+    <div class="row" *ngIf="orders.length>0">
+        <app-menu-item *ngFor="let menu of orders" [menu]="menu" [isOrdered]="true"></app-menu-item>
+    </div>
+
+    <div *ngIf="orders.length==0">
+        There is NO any menu item to show!!
+    </div>
+
+</div>

@@ -2,8 +2,12 @@
 <div class="container">
 
     <button class="btn btn-outline-success" (click)="goBack()">Go back</button>
-    <div class="row">
-        <app-menu-item *ngFor="let menu of menus" [menu]="menu"></app-menu-item>
+    <div class="row" *ngIf="menus.length>0">
+        <app-menu-item *ngFor="let menu of menus" [menu]="menu" [isOrdered]="false"></app-menu-item>
+    </div>
+
+    <div *ngIf="menus.length==0">
+        There is NO any menu item to show!!
     </div>
 
 </div>

@@ -2,6 +2,7 @@
     <div style="height: 450px">
         <img class="card-img-top" [src]="menu.image" alt="Card image" style="height:100%">
     </div>
+    <div *ngIf="isOrdered" style="font-size: 24px;">{{restName}}</div>
     <div class="card-img-overlay">
         <div class="content">
             <h4 class="card-title" style="color: white;">{{menu.name}}</h4>
@@ -16,7 +17,8 @@
                 <app-edit-menu [menu]="menu"></app-edit-menu>
                 <button type="button" class="btn btn-warning" data-toggle="modal"
                  data-target="#exampleModal"(click)="open(mymodal)">Rate</button>
-                <button class="btn btn-info">Order</button>
+                 <button *ngIf="isOrdered" class="btn btn-danger" (click)="deletOrder()">Delete</button>
+                <button *ngIf="!isOrdered" class="btn btn-info" (click)="order()">Order</button>
             </div>
         </div>
 

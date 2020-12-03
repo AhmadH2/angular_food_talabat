@@ -17,12 +17,20 @@ export class MenuItemComponent implements OnInit {
 
   closeResult: string;
 
+  @Input()
+  isOrdered:boolean;
+
+  restName:string;
+
   constructor(public restaurantService: RestaurantService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     for (let i = 0; i < this.menu.rating; i++) {
       this.rating.push(i);
     }
+
+    // this.isOrdered = this.restaurantService.isOrdered(this.menu);
+    this.restName = this.restaurantService.getRestName(this.menu.rest_id);
   }
 
   deleteMenu() {
@@ -50,6 +58,14 @@ export class MenuItemComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+  order() {
+    this.restaurantService.orderItem(this.menu);
+  }
+
+  deletOrder() {
+    this.restaurantService.deleteOrder(this.menu);
   }
 
 }
