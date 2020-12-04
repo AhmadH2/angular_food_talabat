@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { element } from 'protractor';
 import { Observable, of } from 'rxjs';
 import { Menu } from './menu';
+import { Orders } from './orders';
 import { Restaurant } from './restaurant';
 import { RestaurantRating } from './restaurant-rating';
 
@@ -21,11 +22,13 @@ export class RestaurantService {
     'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636'),
     new Menu(1, 1, 'Falafel', 'goood goood', 45.99,
       'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636'),
+    new Menu(2, 2, 'Falafel', 'goood goood', 45.99,
+      'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636'),
   ];
 
   isAdmin = false;
 
-  private orderedItems:Menu[] = [];
+  private ordersList:Orders[] = [];
 
   private ratingList:RestaurantRating[] = [];
   constructor() { }
@@ -46,37 +49,35 @@ export class RestaurantService {
     return this.restaurants.sort((a,b) => (a.name > b.name)?1:-1);
   }
 
-  getOrdered(): Menu[] {
-    return this.orderedItems;
+  getOrders(): Orders[] {
+    return this.ordersList;
+  }
+
+  getOrdersByRestId(rest_id:number) {
+    return this.ordersList.filter((order)=> order.rest_id == rest_id);
   }
 
   isOrdered(menu: Menu): boolean {
-    if(this.orderedItems.indexOf(menu) != -1) {
-      return true;
+
+    for (let i = 0; i < this.ordersList.length; i++) {
+      if ((menu.id == this.ordersList[i].menu_id) && (menu.rest_id == this.ordersList[i].rest_id)) {
+        return true;
+      }
     }
-    else {
-      return false;
-    }
+    return false;
+    
   }
 
-  orderItem(item:Menu) {
-    if (this.isOrdered(item)) {
-      for (let i of this.orderedItems)
-        if (i.id == item.id)
-          item.quantity++;
-    }
-    else {
-      item.quantity = 1;
-      this.orderedItems.push(item);
-    }
-      
+  orderItem(item:Menu, quamtity:number) {
+
+    this.ordersList.push(new Orders(this.ordersList.length, item.rest_id, item.id, quamtity, 'today'));
   }
 
-  deleteOrder(item:Menu) {
-    let index = this.orderedItems.indexOf(item);
-    item.quantity--;
-    if(item.quantity == 0)
-      this.orderedItems.splice(index, 1);
+  deleteOrder(order:Orders) {
+    let index = this.ordersList.indexOf(order);
+    this.ordersList.splice(index, 1);
+    
+     
   }
 
   getRestName(rest_id:number):string{
@@ -92,8 +93,6 @@ export class RestaurantService {
     let index = this.menus.indexOf(menu);
     this.menus[index] = menu;
   }
-
-
 
   deleteMenu(menu: Menu) {
     let index = this.menus.indexOf(menu);
@@ -163,6 +162,14 @@ export class RestaurantService {
       return this.menus.sort((a, b) => (a.name > b.name) ? 1 : -1);
     }
 
+  }
+
+  getMenuItem(rest_id:number, menu_id:number):Menu {
+    return this.menus.filter((menu) => (menu.rest_id==rest_id) && (menu.id==menu_id))[0];
+  }
+
+  getMenuOfOrder(order:Orders) {
+    return this.menus.filter((menu) => (menu.rest_id == order.rest_id) && (menu.id == order.menu_id))[0];
   }
     
 }

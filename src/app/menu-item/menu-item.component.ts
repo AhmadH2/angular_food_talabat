@@ -77,14 +77,13 @@ export class MenuItemComponent implements OnInit {
     }
   }
 
-  order() {
-    this.restaurantService.orderItem(this.menu);
-    this.toastr.success("item added to orders list!");
-  }
-
-  deletOrder() {
-    this.restaurantService.deleteOrder(this.menu);
-    this.toastr.error('Order deleted!');
+  order(quantity:number) {
+    if(quantity > 0 && quantity < 300) {
+      this.restaurantService.orderItem(this.menu, quantity);
+      this.toastr.success("item added to orders list!");
+    }
+    this.modalService.dismissAll();
+    
   }
 
   deleteItem() {

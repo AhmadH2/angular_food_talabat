@@ -18,6 +18,7 @@ import { OrderedListComponent } from './ordered-list/ordered-list.component';
 import {AdminPanelComponent} from './admin-panel/admin-panel.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { OrderedItemComponent } from './ordered-item/ordered-item.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ToastrModule } from 'ngx-toastr';
     PageNotFoundComponent,
     NavBarComponent,
     OrderedListComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    OrderedItemComponent,
   ],
   imports: [
     BrowserModule,

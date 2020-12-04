@@ -1,0 +1,28 @@
+<!-- <p>Works</p> -->
+
+<div class="card">
+    <div style="height: 450px">
+        <img class="card-img-top" [src]="menu.image" alt="Card image" style="height:100%">
+    </div>
+    <div  style="font-size: 24px;">{{restName}}</div>
+    <div class="card-img-overlay">
+        <div class="content">
+            <h4 class="card-title" style="color: white;">{{menu.name}}</h4>
+            <!-- <div>
+                <i *ngFor="let item of rating" class="fa fa-star" style="color: yellow;"></i>
+            </div> -->
+            <p style="color: white;">{{menu.descr}}</p>
+            <p class="card-text" style="color: white;">
+                {{menu.price}}
+            </p>
+            <p class="card-text" style="color: white;">
+                {{order.quantity}} Pieces
+            </p>
+            <div class="row-btns">
+                <button class="btn btn-info" (click)="confirmOrder()">Confirm</button>
+                <button class="btn btn-danger" (click)="deletOrder()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+

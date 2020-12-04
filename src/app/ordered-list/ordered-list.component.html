@@ -2,11 +2,19 @@
 
 <div class="container">
 
+    <div class="form-group">
+        <label for="restaurant">Restaurant</label>
+        <select (change)="filter($event.target.value)" name="restaurant" id="restaurant">
+            <option value="" *ngFor="let restaurant of restaurants" [value]="restaurant.id">{{restaurant.name}}</option>
+        </select>
+    
+    </div>
+
     <h2>Total Price to Pay: ${{calcPrice()}}</h2>
 
     <button class="btn btn-outline-success" (click)="goBack()">Go back</button>
     <div class="row" *ngIf="orders.length>0">
-        <app-menu-item *ngFor="let menu of orders" [menu]="menu" [isOrdered]="true"></app-menu-item>
+        <app-ordered-item *ngFor="let order of orders" [order]="order" class="col-4" (delete)="delete($event)"></app-ordered-item>
     </div>
 
     <div *ngIf="orders.length==0">
