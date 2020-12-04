@@ -18,7 +18,7 @@ export class MenusListComponent implements OnInit {
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('rest_id');
-    console.log('idd' + id);
+    // console.log('idd' + id);
     // this.heroService.getHero(id)
       // .subscribe(hero => this.hero = hero);
     this.menus = this.restaurantService.getMenusById(id);
@@ -31,5 +31,16 @@ export class MenusListComponent implements OnInit {
   filter(value) {
     this.menus = this.restaurantService.filterMenus(value);
   }
+
+  delete(value) {
+    let index = this.menus.indexOf(value);
+    this.menus.splice(index, 1);
+  }
+
+  editMenu(value) {
+    const id = +this.route.snapshot.paramMap.get('rest_id');
+    this.menus = this.restaurantService.getMenusById(id);
+  }
+
 
 }

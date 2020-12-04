@@ -11,12 +11,13 @@ import { RestaurantService } from '../restaurant.service';
   styleUrls: ['./edit-menu.component.css']
 })
 export class EditMenuComponent implements OnInit {
-  // @Output() editMenu: EventEmitter<any> = new EventEmitter();
   @Input() menu: Menu;
   rests: Restaurant[] = this.res.getRestaurants();
 
   model:Menu = new Menu(0, 0, '', '', 0, '', 9);
 
+  @Output()
+  edit = new EventEmitter<Menu>();
 
   constructor(private modalService: NgbModal, private res: RestaurantService) { }
 
@@ -44,6 +45,7 @@ export class EditMenuComponent implements OnInit {
     this.menu.image = this.model.image;
 
     this.res.editMenu(this.menu);
+    this.edit.emit(this.menu);
     this.modalService.dismissAll();
     
   }

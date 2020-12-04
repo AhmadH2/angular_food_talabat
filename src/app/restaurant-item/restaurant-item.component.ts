@@ -15,6 +15,7 @@ export class RestaurantItemComponent implements OnInit {
   rating: number[] = [];
 
   closeResult: string;
+  isAdmin:boolean
 
 
   constructor(public restaurantService: RestaurantService, private modalService: NgbModal) { }
@@ -23,6 +24,7 @@ export class RestaurantItemComponent implements OnInit {
     for(let i=0; i<this.restaurant.rating; i++) {
       this.rating.push(i);
     }
+    this.isAdmin = this.restaurantService.isAdmin;
   }
 
   deleteRest() {

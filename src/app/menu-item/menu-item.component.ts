@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrService } from 'ngx-toastr';
 import { Menu } from '../menu';
 import { Restaurant } from '../restaurant';
 import { RestaurantService } from '../restaurant.service';
@@ -13,6 +14,7 @@ export class MenuItemComponent implements OnInit {
 
   @Input()
   menu: Menu;
+
   rating: number[] = [];
 
   closeResult: string;
@@ -20,9 +22,18 @@ export class MenuItemComponent implements OnInit {
   @Input()
   isOrdered:boolean;
 
+  @Output()
+  delete = new EventEmitter<Menu>();
+
+  @Output()
+  edit = new EventEmitter<Menu>();
+
+  isAdmin:boolean;
+
   restName:string;
 
-  constructor(public restaurantService: RestaurantService, private modalService: NgbModal) { }
+  constructor(private restaurantService: RestaurantService, private modalService: NgbModal,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     for (let i = 0; i < this.menu.rating; i++) {
@@ -31,6 +42,7 @@ export class MenuItemComponent implements OnInit {
 
     // this.isOrdered = this.restaurantService.isOrdered(this.menu);
     this.restName = this.restaurantService.getRestName(this.menu.rest_id);
+    this.isAdmin = this.restaurantService.isAdmin;
   }
 
   deleteMenu() {
@@ -62,10 +74,23 @@ export class MenuItemComponent implements OnInit {
 
   order() {
     this.restaurantService.orderItem(this.menu);
+    this.toastr.success("item added to orders list!");
   }
 
   deletOrder() {
     this.restaurantService.deleteOrder(this.menu);
+    this.toastr.error('Order deleted!');
   }
+
+  deleteItem() {
+    this.restaurantService.deleteMenu(this.menu);
+    this.delete.emit(this.menu);
+    this.toastr.error('Menu deleted!');
+  }
+
+  editMenu(value) {
+    this.edit.emit(this.menu)
+  }
+
 
 }
