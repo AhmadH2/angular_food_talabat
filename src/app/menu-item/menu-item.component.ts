@@ -96,6 +96,8 @@ export class MenuItemComponent implements OnInit {
   editMenu(value) {
     this.edit.emit(this.menu)
   }
-
+  confirmOrder() {
+    this.toastr.success("Confirmed Successully");
+  }
 
 }

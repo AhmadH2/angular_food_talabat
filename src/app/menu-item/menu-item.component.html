@@ -23,7 +23,8 @@
                 <app-edit-menu *ngIf="isAdmin" [menu]="menu" (edit)="editMenu($event)"></app-edit-menu>
                 <button  type="button" class="btn btn-warning" data-toggle="modal"
                  data-target="#exampleModal"(click)="open(mymodal)">Rate</button>
-                 <button *ngIf="isOrdered" class="btn btn-danger" (click)="deletOrder()">Delete</button>
+                <button *ngIf="isOrdered" class="btn btn-info" (click)="confirmOrder()">Confirm</button>
+                <button *ngIf="isOrdered" class="btn btn-danger" (click)="deletOrder()">Delete</button>
                 <button *ngIf="!isOrdered && !isAdmin" class="btn btn-info" (click)="order()">Order</button>
                 <button *ngIf="isAdmin" class="btn btn-danger" (click)="deleteItem()">delete</button>
             </div>
