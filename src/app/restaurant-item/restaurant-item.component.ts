@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Restaurant } from '../restaurant';
 import { RestaurantService } from '../restaurant.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { RestaurantRating } from '../restaurant-rating';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-restaurant-item',
@@ -21,7 +23,12 @@ export class RestaurantItemComponent implements OnInit {
   constructor(public restaurantService: RestaurantService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    for(let i=0; i<this.restaurant.rating; i++) {
+    let rat = 0;
+    let restsRating = this.restaurantService.getRatingsById(this.restaurant.id);
+    restsRating.forEach((elm) => rat += elm.rating);
+    rat = rat / restsRating.length;
+    this.rating = [];
+    for (let i = 0; i < rat; i++) {
       this.rating.push(i);
     }
     this.isAdmin = this.restaurantService.isAdmin;
@@ -40,11 +47,29 @@ export class RestaurantItemComponent implements OnInit {
   }
 
   rate(rating:number) {
-    this.restaurantService.rateRestaurant(rating, this.restaurant);
+    let rate = new RestaurantRating(this.restaurantService.getRatings().length, 
+    this.restaurant.id, 0, rating, 'today');
+
+    this.restaurantService.addRating(rate);
+
+    // this.restaurantService.rateRestaurant(rating, this.restaurant);
+
+    let rat:number = 0.0;
+    let restsRating = this.restaurantService.getRatingsById(this.restaurant.id);
+
+    for(let i=0; i<restsRating.length; i++) {
+      
+      rat = Math.round(rat) + Math.round(restsRating[i].rating);
+    }
+    // console.log(rat);
+    // restsRating.forEach((elm) => rat += elm.rating);
+    rat = rat / restsRating.length;
     this.rating = [];
-    for (let i = 0; i < rating; i++) {
+    for (let i = 0; i < rat; i++) {
       this.rating.push(i);
     }
+
+
     this.modalService.dismissAll();
   }
 

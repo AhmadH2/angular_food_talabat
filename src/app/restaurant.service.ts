@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { element } from 'protractor';
 import { Observable, of } from 'rxjs';
 import { Menu } from './menu';
 import { Restaurant } from './restaurant';
+import { RestaurantRating } from './restaurant-rating';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +26,21 @@ export class RestaurantService {
   isAdmin = false;
 
   private orderedItems:Menu[] = [];
+
+  private ratingList:RestaurantRating[] = [];
   constructor() { }
+
+  getRatings(): RestaurantRating[] {
+    return this.ratingList;
+  }
+
+  getRatingsById(rest_id:number) {
+    return this.ratingList.filter((element)=> element.rest_id==rest_id);
+  }
+
+  addRating(rate:RestaurantRating) {
+    this.ratingList.push(rate);
+  }
 
   getRestaurants(): Restaurant[] {
     return this.restaurants.sort((a,b) => (a.name > b.name)?1:-1);
