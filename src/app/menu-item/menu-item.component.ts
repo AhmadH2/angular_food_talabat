@@ -59,6 +59,11 @@ export class MenuItemComponent implements OnInit {
 
   rate(rating: number) {
     this.restaurantService.rateMenu(rating, this.menu);
+    this.menu.rating = rating;
+    this.rating = [];
+    for(let i=0; i<rating; i++) {
+      this.rating.push(i);
+    }
     this.modalService.dismissAll();
   }
 

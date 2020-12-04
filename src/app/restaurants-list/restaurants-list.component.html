@@ -1,11 +1,12 @@
 
 <div class="container">
-    <p>Filter by</p>
+    <br>
+    <span>Filter by </span>
     <select  (change)="filter($event.target.value)">
         <option *ngFor="let item of [ 'Name', 'Rating', 'City']" value={{item}}>{{item}}</option>
     </select>
     <div>
-        
+    <br>
     <div class="row" *ngIf="restaurants.length>0">
         <app-restaurant-item *ngFor="let restaurant of restaurants"
          [restaurant]="restaurant"></app-restaurant-item>

@@ -16,7 +16,7 @@
             <a routerLink="/menus/{{restaurant.id}}" routerLinkActive="active" class="btn btn-info">show menu items</a>
             <div class="row-btns">
                 <app-edit-restaurant *ngIf="isAdmin" [restaurant]='restaurant'></app-edit-restaurant>
-                <button *ngIf="!isAdmin" type="button" class="btn btn-warning" data-toggle="modal" 
+                <button type="button" class="btn btn-warning" data-toggle="modal" 
                 data-target="#exampleModal" (click)="open(mymodal)">Rate</button>
                 <button *ngIf="isAdmin" class="btn btn-danger" (click)="deleteRest()">Delete</button>
             </div>
@@ -27,17 +27,20 @@
  
 <ng-template #mymodal let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+        <h4 class="modal-title" id="modal-basic-title">Rating</h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">×</span>
         </button>
     </div>
     <div class="modal-body">
-        <input type="text" class="form-control" #ratingInput>
-
+        <input ngModel pattern="[1-5]" required type="text" class="form-control" #ratingInput="ngModel">
+    </div>
+    <div [hidden]="ratingInput.valid || !ratingInput.dirty">
+        <span class="alert alert-danger">Rating should be [1-5]</span>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="rate(ratingInput.value)">Save</button>
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">clode</button>
+        <button type="button" class="btn btn-outline-dark" [disabled]="!ratingInput.valid"
+            (click)="rate(ratingInput.value)">Save</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">close</button>
     </div>
 </ng-template>

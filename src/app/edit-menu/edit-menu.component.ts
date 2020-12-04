@@ -14,7 +14,7 @@ export class EditMenuComponent implements OnInit {
   @Input() menu: Menu;
   rests: Restaurant[] = this.res.getRestaurants();
 
-  model:Menu = new Menu(0, 0, '', '', 0, '', 9);
+  model:Menu = new Menu(0, 0, '', '', 0, '');
 
   @Output()
   edit = new EventEmitter<Menu>();

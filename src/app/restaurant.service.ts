@@ -9,16 +9,16 @@ import { Restaurant } from './restaurant';
 export class RestaurantService {
 
   private restaurants: Restaurant[] = [
-    new Restaurant(2, 'Ahmad', 'Yatta', 'Street', 4, 5, '32',
-      'https://media-cdn.tripadvisor.com/media/photo-s/11/9e/75/70/sala-a-restaurant.jpg', 4),
-    new Restaurant(1, 'Horyzat', 'Hebron', 'Street', 4, 6, '32',
-      'https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png', 5),
+    new Restaurant(2, 'Ahmad', 'Yatta', 4, 5,
+      'https://media-cdn.tripadvisor.com/media/photo-s/11/9e/75/70/sala-a-restaurant.jpg'),
+    new Restaurant(1, 'Horyzat', 'Hebron', 4, 6,
+      'https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png'),
   ];
   private menus: Menu[] = [
     new Menu(0, 1, 'Menu Item', 'goood goood', 45.99, 
-    'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636', 5),
+    'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636'),
     new Menu(1, 1, 'Falafel', 'goood goood', 45.99,
-      'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636', 3),
+      'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636'),
   ];
 
   isAdmin = true;
