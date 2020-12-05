@@ -6,6 +6,6 @@
 .dash-link{
     height: 200px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-evenly;
 }

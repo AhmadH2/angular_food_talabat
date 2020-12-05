@@ -8,12 +8,16 @@ import { RestaurantService } from './restaurant.service';
 })
 export class AppComponent {
 
-  isAdmin:boolean;
+
 
   constructor(private restaurantService:RestaurantService) { 
-    this.isAdmin = this.restaurantService.isAdmin;
+    
   };
 
-  ngOnInit(): void { };
+  ngOnInit(): void { 
+
+
+    
+  };
   title = 'Talabat';
 }

@@ -14,7 +14,7 @@
 
     <button class="btn btn-outline-success" (click)="goBack()">Go back</button>
     <div class="row" *ngIf="orders.length>0">
-        <app-ordered-item *ngFor="let order of orders" [order]="order" class="col-4" (delete)="delete($event)"></app-ordered-item>
+        <app-ordered-item *ngFor="let order of orders" [order]="order" class="col-md-4" (delete)="delete($event)"></app-ordered-item>
     </div>
 
     <div *ngIf="orders.length==0">

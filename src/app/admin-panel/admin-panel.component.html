@@ -1,12 +1,5 @@
-<app-nav-bar></app-nav-bar>
 
-<div class="main">
-    <div class="dash-link col-3">
-        <a [routerLink]="['/addRest']" routerLinkActive="router-link-active">Add Restauant</a>
-        <a [routerLink]="['/addMenu']" routerLinkActive="router-link-active">Add Menu</a>
-    </div>
-    <div class="col-9">
-        <router-outlet></router-outlet>
-    </div>
-
+<div class="dash-link">
+    <a [routerLink]="['/addRest']" routerLinkActive="router-link-active">Add Restauant</a>
+    <a [routerLink]="['/addMenu']" routerLinkActive="router-link-active">Add Menu</a>
 </div>

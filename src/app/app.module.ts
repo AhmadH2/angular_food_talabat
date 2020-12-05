@@ -19,6 +19,9 @@ import {AdminPanelComponent} from './admin-panel/admin-panel.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { OrderedItemComponent } from './ordered-item/ordered-item.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { UserComponent } from './user/user.component';
 
 
 @NgModule({
@@ -37,6 +40,9 @@ import { OrderedItemComponent } from './ordered-item/ordered-item.component';
     OrderedListComponent,
     AdminPanelComponent,
     OrderedItemComponent,
+    LoginComponent,
+    RegisterComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,

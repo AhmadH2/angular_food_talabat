@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { element } from 'protractor';
-import { Observable, of } from 'rxjs';
+import { Customer } from './customer';
 import { Menu } from './menu';
 import { Orders } from './orders';
 import { Restaurant } from './restaurant';
@@ -12,7 +11,7 @@ import { RestaurantRating } from './restaurant-rating';
 export class RestaurantService {
 
   private restaurants: Restaurant[] = [
-    new Restaurant(2, 'Ahmad', 'Yatta', 4, 5,
+    new Restaurant(0, 'Ahmad', 'Yatta', 4, 5,
       'https://media-cdn.tripadvisor.com/media/photo-s/11/9e/75/70/sala-a-restaurant.jpg'),
     new Restaurant(1, 'Horyzat', 'Hebron', 4, 6,
       'https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png'),
@@ -20,17 +19,38 @@ export class RestaurantService {
   private menus: Menu[] = [
     new Menu(0, 1, 'Menu Item', 'goood goood', 45.99, 
     'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636'),
-    new Menu(1, 1, 'Falafel', 'goood goood', 45.99,
+    new Menu(1, 1, 'Falafel', 'goood goood', 15.99,
       'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636'),
-    new Menu(2, 2, 'Falafel', 'goood goood', 45.99,
+    new Menu(2, 2, 'Falafel', 'goood goood', 25.99,
       'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636'),
   ];
 
   isAdmin = false;
+  loggedIn = false;
 
   private ordersList:Orders[] = [];
 
   private ratingList:RestaurantRating[] = [];
+
+  private customers = [
+    new Customer(0, 'Ahmad', 'Horyzat', '999'),
+    new Customer(1, 'Ali', 'Horyzat', '999'),
+  ];
+
+  private adminList= ['Ahmad'];
+
+  getLogInf(){
+    return this.loggedIn;
+  }
+
+  getCustomers(): Customer[] {
+    return this.customers;
+  }
+
+  getAdminList():string[] {
+    return this.adminList;
+  }
+
   constructor() { }
 
   getRatings(): RestaurantRating[] {

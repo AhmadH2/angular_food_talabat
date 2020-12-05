@@ -14,7 +14,7 @@ export class AddMenuFormComponent implements OnInit {
 
   menus: Menu[];
 
-  model = new Menu(0, 0, '', '', 0, '');
+  model = new Menu(this.restaurantService.getMenus().length, 0, '', '', 0, '');
 
   constructor(public restaurantService: RestaurantService) { }
 
@@ -30,7 +30,7 @@ export class AddMenuFormComponent implements OnInit {
   newMenu() {
     // this.menus.push(this.model);
     this.restaurantService.addMenu(this.model);
-    this.model = new Menu(0, 0, '', '', 0, '');
+    this.model = new Menu(this.restaurantService.getMenus().length, 0, '', '', 0, '');
     console.log(this.menus[0]);
   }
 
