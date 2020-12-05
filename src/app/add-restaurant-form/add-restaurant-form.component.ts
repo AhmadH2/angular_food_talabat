@@ -18,7 +18,6 @@ export class AddRestaurantFormComponent implements OnInit {
   constructor(public restaurantService: RestaurantService) { }
 
   ngOnInit(): void {
-    // this.restaurants = this.restaurantService.getRestaurants();
   }
 
   onSubmit() {
@@ -27,10 +26,8 @@ export class AddRestaurantFormComponent implements OnInit {
   }
 
   newRestaurant() {
-    // this.restaurants.push(this.model);
     this.restaurantService.addRestaurant(this.model);
     this.model = new Restaurant(this.restaurantService.getRestaurants().length, '', '', 0, 0, '',);
-    // console.log(this.restaurants[0]);
   }
 
 

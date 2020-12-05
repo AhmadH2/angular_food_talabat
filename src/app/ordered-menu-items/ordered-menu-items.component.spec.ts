@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PageNotFoundComponent } from './page-not-found.component';
+import { OrderedMenuItemsComponent } from './ordered-menu-items.component';
 
-describe('PageNotFoundComponent', () => {
-  let component: PageNotFoundComponent;
-  let fixture: ComponentFixture<PageNotFoundComponent>;
+describe('OrderedMenuItemsComponent', () => {
+  let component: OrderedMenuItemsComponent;
+  let fixture: ComponentFixture<OrderedMenuItemsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PageNotFoundComponent ]
+      declarations: [ OrderedMenuItemsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PageNotFoundComponent);
+    fixture = TestBed.createComponent(OrderedMenuItemsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

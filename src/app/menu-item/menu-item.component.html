@@ -1,6 +1,4 @@
 
-<!-- <p>Works</p> -->
-
 <div class="card">
     <div style="height: 450px">
         <img class="card-img-top" [src]="menu.image" alt="Card image" style="height:100%">
@@ -14,7 +12,7 @@
             </div>
             <p style="color: white;">{{menu.descr}}</p>
             <p class="card-text" style="color: white;">
-                {{menu.price}}
+                ${{menu.price}}
             </p>
             <p *ngIf="isOrdered" class="card-text" style="color: white;">
                 {{menu.quantity}} Pieces

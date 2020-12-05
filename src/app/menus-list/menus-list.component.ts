@@ -12,16 +12,16 @@ import { Location } from '@angular/common';
 })
 export class MenusListComponent implements OnInit {
   menus: Menu[];
+  id:number;
+  isAdmin:boolean;
 
   constructor(private restaurantService: RestaurantService, 
     private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
-    const id = +this.route.snapshot.paramMap.get('rest_id');
-    // console.log('idd' + id);
-    // this.heroService.getHero(id)
-      // .subscribe(hero => this.hero = hero);
-    this.menus = this.restaurantService.getMenusById(id);
+    this.id = +this.route.snapshot.paramMap.get('rest_id');
+    this.menus = this.restaurantService.getMenusById(this.id);
+    this.isAdmin = this.restaurantService.isAdmin;
   }
 
   goBack() {

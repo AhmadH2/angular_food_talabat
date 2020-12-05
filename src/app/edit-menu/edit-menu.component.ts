@@ -27,6 +27,7 @@ export class EditMenuComponent implements OnInit {
     this.model.descr = this.menu.descr;
     this.model.price = this.menu.price;
     this.model.image = this.menu.image;
+
   }
 
   open(content) {
@@ -36,6 +37,7 @@ export class EditMenuComponent implements OnInit {
   
 
   onSubmit() {
+
     this.menu.id = this.model.id;
     this.menu.name = this.model.name;
     this.menu.descr = this.model.descr;

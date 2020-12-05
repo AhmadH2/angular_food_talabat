@@ -8,16 +8,11 @@ import { RestaurantService } from './restaurant.service';
 })
 export class AppComponent {
 
-
-
   constructor(private restaurantService:RestaurantService) { 
     
   };
 
-  ngOnInit(): void { 
-
-
-    
+  ngOnInit(): void {   
   };
   title = 'Talabat';
 }

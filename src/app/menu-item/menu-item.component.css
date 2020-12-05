@@ -11,11 +11,9 @@
 }
 
 .content{
-    /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     height: 100%;
-    /* text-align: center; */
     justify-content: flex-end;
     padding: 0px;
     margin: 0%;

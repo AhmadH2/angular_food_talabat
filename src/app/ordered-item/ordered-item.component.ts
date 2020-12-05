@@ -20,16 +20,18 @@ export class OrderedItemComponent implements OnInit {
   @Output()
   delete = new EventEmitter<Orders>();
 
-  constructor(private restaurantServise: RestaurantService, private toastr: ToastrService) { }
+  constructor(private restaurantService: RestaurantService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.restName = this.restaurantServise.getRestName(this.order.rest_id);
-    this.menu = this.restaurantServise.getMenuItem(this.order.rest_id, this.order.menu_id);
+    this.restName = this.restaurantService.getRestName(this.order.rest_id);
+    this.menu = this.restaurantService.getMenuItem(this.order.rest_id, this.order.menu_id);
   }
 
   deletOrder(){
-    this.order.quantity--;
+    this.restaurantService.deleteOrder(this.order);
+    this.toastr.error('Item deleted!');
     this.delete.emit(this.order);
+    
   }
 
   confirmOrder() {

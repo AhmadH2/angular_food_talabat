@@ -11,33 +11,41 @@ import { RestaurantRating } from './restaurant-rating';
 export class RestaurantService {
 
   private restaurants: Restaurant[] = [
-    new Restaurant(0, 'Ahmad', 'Yatta', 4, 5,
+    new Restaurant(0, 'Restaurant1', 'Yatta', 4, 5,
       'https://media-cdn.tripadvisor.com/media/photo-s/11/9e/75/70/sala-a-restaurant.jpg'),
-    new Restaurant(1, 'Horyzat', 'Hebron', 4, 6,
-      'https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png'),
+    new Restaurant(1, 'Restaurant2', 'Hebron', 4, 6,
+      'https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
   ];
   private menus: Menu[] = [
-    new Menu(0, 1, 'Menu Item', 'goood goood', 45.99, 
-    'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636'),
+    new Menu(0, 1, 'Pizza', 'goood goood', 45.99, 
+    'https://st.depositphotos.com/1900347/4146/i/600/depositphotos_41466555-stock-photo-image-of-slice-of-pizza.jpg'),
     new Menu(1, 1, 'Falafel', 'goood goood', 15.99,
-      'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636'),
-    new Menu(2, 2, 'Falafel', 'goood goood', 25.99,
-      'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&resize=700%2C636'),
+      'https://kitchen.sayidaty.net/uploads/small/47/47bc7303629287029bc155f156aafd18_w750_h750.jpg'),
+    new Menu(2, 0, 'Berger', 'goood goood', 25.99,
+      'https://image.shutterstock.com/image-photo/hemberger-fried-chicken-delicious-hamburgers-260nw-1819084304.jpg'),
   ];
 
   isAdmin = false;
   loggedIn = false;
 
-  private ordersList:Orders[] = [];
+
+  //fetch them from server by custom id
+  private ordersList:Orders[] = [
+    new Orders(0, 1, 0, 0, 2, '2020/3/3'),
+  ];
 
   private ratingList:RestaurantRating[] = [];
 
   private customers = [
     new Customer(0, 'Ahmad', 'Horyzat', '999'),
-    new Customer(1, 'Ali', 'Horyzat', '999'),
+    new Customer(1, 'Mohammad', 'Saleh', '999'),
+    new Customer(2, 'Ali', 'Horyzat', '999'),
   ];
 
+  customer_id = -1;
+
   private adminList= ['Ahmad'];
+
 
   getLogInf(){
     return this.loggedIn;
@@ -88,16 +96,14 @@ export class RestaurantService {
     
   }
 
-  orderItem(item:Menu, quamtity:number) {
+  orderItem(item:Menu, quantity:number) {
 
-    this.ordersList.push(new Orders(this.ordersList.length, item.rest_id, item.id, quamtity, 'today'));
+    this.ordersList.push(new Orders(this.ordersList.length, item.rest_id, item.id,this.customer_id, quantity, 'today'));
   }
 
   deleteOrder(order:Orders) {
     let index = this.ordersList.indexOf(order);
-    this.ordersList.splice(index, 1);
-    
-     
+    this.ordersList.splice(index, 1); 
   }
 
   getRestName(rest_id:number):string{
@@ -156,9 +162,6 @@ export class RestaurantService {
     this.restaurants[index] = restaurant;
   }
 
-  
-
-  
   filterRest(method:string):Restaurant[] {
     method = method.toLowerCase();
     if(method == 'rating') {

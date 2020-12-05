@@ -28,8 +28,10 @@ export class LoginComponent implements OnInit {
 
   login(username:string, password:string) {
     let login = false;
+
+    let cust = this.restaurantService.getCustomers().filter((custmer) => custmer.first_name == username);
     
-    login = this.restaurantService.getCustomers().filter((custmer) => custmer.first_name == username).length > 0;
+    login = cust.length > 0;
     if (login) {
       if (this.restaurantService.getAdminList().filter((admin)=>admin==username).length > 0) {
         this.restaurantService.isAdmin = true;
@@ -37,6 +39,7 @@ export class LoginComponent implements OnInit {
       }
       this.loggedIn = true;
       this.restaurantService.loggedIn = true;
+      this.restaurantService.customer_id = cust[0].id;
     }
 
   }

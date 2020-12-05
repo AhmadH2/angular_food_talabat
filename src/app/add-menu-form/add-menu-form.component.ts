@@ -28,7 +28,6 @@ export class AddMenuFormComponent implements OnInit {
   }
 
   newMenu() {
-    // this.menus.push(this.model);
     this.restaurantService.addMenu(this.model);
     this.model = new Menu(this.restaurantService.getMenus().length, 0, '', '', 0, '');
     console.log(this.menus[0]);

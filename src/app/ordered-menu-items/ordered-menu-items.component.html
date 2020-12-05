@@ -1,0 +1,8 @@
+<button class="btn btn-outline-success" (click)="goBack()">Go back</button>
+
+<div class="col-6">
+    <ul *ngFor="let order of orders">
+        <li>Order id: {{order.id}}, Restaurant Id: {{order.rest_id}}, 
+            Customer id: {{order.customer_id}}, Menu id: {{order.menu_id}}</li>
+    </ul>
+</div>

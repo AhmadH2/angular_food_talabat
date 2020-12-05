@@ -20,7 +20,7 @@ export class OrderedListComponent implements OnInit {
     private location: Location) { }
 
   ngOnInit(): void {
-    this.orders = this.restaurantService.getOrders();
+    this.orders = this.restaurantService.getOrdersByRestId(0);
     this.restaurants = this.restaurantService.getRestaurants();
   }
 
@@ -29,9 +29,7 @@ export class OrderedListComponent implements OnInit {
   }
 
   delete(value:Orders) {
-    this.restaurantService.deleteOrder(value);
-    let index = this.orders.indexOf(value);
-    this.orders.splice(index, 1);
+    this.filter(value.rest_id);
   }
 
   calcPrice():number {

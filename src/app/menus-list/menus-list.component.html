@@ -5,7 +5,10 @@
     <select name="" id="" (change)="filter($event.target.value)">
         <option *ngFor="let item of ['Name', 'Rating']" value={{item}}>{{item}}</option>
     </select>
-    <br><br>
+    <br><br> 
+    <a *ngIf="isAdmin" class="btn btn-info" routerLink="/ordersMenu/{{id}}" routerLinkActive="router-link-active" >
+        Show Orders From this Restaurant</a>
+
     <button class="btn btn-outline-success" (click)="goBack()">Go back</button>
 
     <div class="row" *ngIf="menus.length>0">

@@ -52,8 +52,6 @@ export class RestaurantItemComponent implements OnInit {
 
     this.restaurantService.addRating(rate);
 
-    // this.restaurantService.rateRestaurant(rating, this.restaurant);
-
     let rat:number = 0.0;
     let restsRating = this.restaurantService.getRatingsById(this.restaurant.id);
 
@@ -61,8 +59,7 @@ export class RestaurantItemComponent implements OnInit {
       
       rat = Math.round(rat) + Math.round(restsRating[i].rating);
     }
-    // console.log(rat);
-    // restsRating.forEach((elm) => rat += elm.rating);
+
     rat = rat / restsRating.length;
     this.rating = [];
     for (let i = 0; i < rat; i++) {
