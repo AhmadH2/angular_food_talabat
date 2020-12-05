@@ -11,9 +11,9 @@ import { RestaurantRating } from './restaurant-rating';
 export class RestaurantService {
 
   private restaurants: Restaurant[] = [
-    new Restaurant(0, 'Restaurant1', 'Yatta', 4, 5,
+    new Restaurant(0, 'Rest1', 'Yatta', 4, 5,
       'https://media-cdn.tripadvisor.com/media/photo-s/11/9e/75/70/sala-a-restaurant.jpg'),
-    new Restaurant(1, 'Restaurant2', 'Hebron', 4, 6,
+    new Restaurant(1, 'Rest2', 'Hebron', 4, 6,
       'https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
   ];
   private menus: Menu[] = [

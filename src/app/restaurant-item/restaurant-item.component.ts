@@ -25,7 +25,9 @@ export class RestaurantItemComponent implements OnInit {
   ngOnInit(): void {
     let rat = 0;
     let restsRating = this.restaurantService.getRatingsById(this.restaurant.id);
-    restsRating.forEach((elm) => rat += elm.rating);
+    for (let i = 0; i < restsRating.length; i++) {
+      rat = Math.round(rat) + Math.round(restsRating[i].rating);
+    }
     rat = rat / restsRating.length;
     this.rating = [];
     for (let i = 0; i < rat; i++) {

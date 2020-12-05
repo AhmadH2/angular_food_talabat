@@ -61,7 +61,7 @@
         <input ngModel pattern="[0-9]*" required type="text" class="form-control" #orderInput="ngModel">
     </div>
     <div [hidden]="orderInput.valid || !orderInput.dirty">
-        <span class="alert alert-danger">Rating should be [1-5]</span>
+        <span class="alert alert-danger">Quantity must be positive number</span>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" [disabled]="!orderInput.valid"

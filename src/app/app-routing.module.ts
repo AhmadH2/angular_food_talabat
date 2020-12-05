@@ -16,8 +16,8 @@ const routes: Routes = [
   { path: 'orders', component: OrderedListComponent },
   { path: 'ordersMenu/:rest_id', component: OrderedMenuItemsComponent },
   { path: 'login', component: LoginComponent },
-  { path: '', component: RestaurantsListComponent },
-  { path: '**', component: RestaurantsListComponent }
+  { path: '', redirectTo: '/restaurants', pathMatch: 'full' },
+  { path: '**', redirectTo: '/restaurants', pathMatch: 'full' }
 
 ];
 
