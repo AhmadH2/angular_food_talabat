@@ -14,13 +14,19 @@ export class AddMenuFormComponent implements OnInit {
 
   menus: Menu[];
 
-  model = new Menu(this.restaurantService.getMenus().length, 0, '', '', 0, '');
+  model = new Menu('', '', '', '', 0, '');
+  responseText = '';
 
   constructor(public restaurantService: RestaurantService) { }
 
   ngOnInit(): void {
-    this.menus = this.restaurantService.getMenus();
-    this.restaurants = this.restaurantService.getRestaurants();
+    // this.menus = this.restaurantService.getMenus();
+    
+    // this.restaurantService.getRestaurants();
+    this.restaurantService.getRestaurants().subscribe(
+      (rest: Restaurant[]) => this.restaurants = rest,
+      (err) => console.log(err),
+    );
   }
 
   onSubmit() {
@@ -28,8 +34,11 @@ export class AddMenuFormComponent implements OnInit {
   }
 
   newMenu() {
-    this.restaurantService.addMenu(this.model);
-    this.model = new Menu(this.restaurantService.getMenus().length, 0, '', '', 0, '');
+    this.restaurantService.addMenu(this.model).subscribe(
+      (data) => this.responseText = JSON.stringify(data),
+      (error) => this.responseText = error
+    )
+    this.model = new Menu('', '', '', '', 0, '');
     console.log(this.menus[0]);
   }
 

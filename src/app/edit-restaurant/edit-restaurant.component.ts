@@ -52,7 +52,7 @@ export class EditRestaurantComponent implements OnInit {
     this.restaurant.phone = this.model.phone;
     this.modalService.dismissAll();
     this.restaurant.image = this.model.image;
-    
+    this.restaurantService.editRestaurant(this.restaurant).subscribe();
     this.modalService.dismissAll();
   }
 

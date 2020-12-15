@@ -12,13 +12,13 @@ import { Orders } from '../orders';
 export class OrderedMenuItemsComponent implements OnInit {
 
   orders:Orders[];
-  id:number;
+  id:string;
 
   constructor(private restaurantService: RestaurantService,
     private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
-    this.id = +this.route.snapshot.paramMap.get('rest_id');
+    this.id = this.route.snapshot.paramMap.get('rest_id');
     this.orders = this.restaurantService.getOrdersByRestId(this.id);
   }
 

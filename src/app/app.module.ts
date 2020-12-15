@@ -20,6 +20,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { OrderedItemComponent } from './ordered-item/ordered-item.component';
 import { LoginComponent } from './login/login.component';
 import { OrderedMenuItemsComponent } from './ordered-menu-items/ordered-menu-items.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { OrderedMenuItemsComponent } from './ordered-menu-items/ordered-menu-ite
     NgbModule,
     BrowserAnimationsModule,
     ToastrModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -20,8 +20,11 @@ export class OrderedListComponent implements OnInit {
     private location: Location) { }
 
   ngOnInit(): void {
-    this.orders = this.restaurantService.getOrdersByRestId(0);
-    this.restaurants = this.restaurantService.getRestaurants();
+    this.orders = this.restaurantService.getOrdersByRestId('');
+    this.restaurantService.getRestaurants().subscribe(
+      (rest: Restaurant[]) => this.restaurants = rest,
+    );
+    
   }
 
   goBack() {

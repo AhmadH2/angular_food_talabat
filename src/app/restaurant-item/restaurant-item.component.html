@@ -13,7 +13,7 @@
             <p class="card-text" style="color: white;">
                 {{restaurant.street}}
             </p>
-            <a routerLink="/menus/{{restaurant.id}}" routerLinkActive="active" class="btn btn-info">show menu items</a>
+            <a routerLink="menus/{{restaurant._id}}" routerLinkActive="active" class="btn btn-info">show menu items</a>
             <div class="row-btns">
                 <app-edit-restaurant *ngIf="isAdmin" [restaurant]='restaurant'></app-edit-restaurant>
                 <button type="button" class="btn btn-warning" data-toggle="modal" 

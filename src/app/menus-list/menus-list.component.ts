@@ -12,15 +12,22 @@ import { Location } from '@angular/common';
 })
 export class MenusListComponent implements OnInit {
   menus: Menu[];
-  id:number;
+  id:string;
   isAdmin:boolean;
 
   constructor(private restaurantService: RestaurantService, 
     private route: ActivatedRoute, private location: Location) { }
 
   ngOnInit(): void {
-    this.id = +this.route.snapshot.paramMap.get('rest_id');
-    this.menus = this.restaurantService.getMenusById(this.id);
+    this.route.params.subscribe(
+      (d) => {this.id = d['id']; console.log(this.id)},
+    );
+  
+    // this.id = this.route.snapshot.paramMap.get('rest_id');
+    this.restaurantService.getMenusById(this.id).subscribe(
+      (men:Menu[]) => this.menus = men,
+      (err) => console.log(err)
+    );
     this.isAdmin = this.restaurantService.isAdmin;
   }
 
@@ -38,8 +45,11 @@ export class MenusListComponent implements OnInit {
   }
 
   editMenu(value) {
-    const id = +this.route.snapshot.paramMap.get('rest_id');
-    this.menus = this.restaurantService.getMenusById(id);
+    const id = this.route.snapshot.paramMap.get('rest_id');
+    this.restaurantService.getMenusById(id).subscribe(
+      (men: Menu[]) => this.menus = men,
+      (err) => console.log(err)
+    );
   }
 
 

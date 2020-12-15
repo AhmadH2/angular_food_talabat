@@ -12,9 +12,9 @@ import { RestaurantService } from '../restaurant.service';
 })
 export class EditMenuComponent implements OnInit {
   @Input() menu: Menu;
-  rests: Restaurant[] = this.res.getRestaurants();
+  rests: Restaurant[];
 
-  model:Menu = new Menu(0, 0, '', '', 0, '');
+  model:Menu = new Menu('', '', '', '', 0, '');
 
   @Output()
   edit = new EventEmitter<Menu>();
@@ -22,6 +22,9 @@ export class EditMenuComponent implements OnInit {
   constructor(private modalService: NgbModal, private res: RestaurantService) { }
 
   ngOnInit(): void {
+    this.res.getRestaurants().subscribe(
+      (rest: Restaurant[]) => this.rests = rest,
+    );
     this.model.id = this.menu.id;
     this.model.name = this.menu.name;
     this.model.descr = this.menu.descr;
@@ -48,6 +51,7 @@ export class EditMenuComponent implements OnInit {
 
     this.res.editMenu(this.menu);
     this.edit.emit(this.menu);
+    this.res.editMenu(this.menu).subscribe;
     this.modalService.dismissAll();
     
   }

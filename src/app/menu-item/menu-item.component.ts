@@ -87,7 +87,7 @@ export class MenuItemComponent implements OnInit {
   }
 
   deleteItem() {
-    this.restaurantService.deleteMenu(this.menu);
+    this.restaurantService.deleteMenu(this.menu).subscribe();
     this.delete.emit(this.menu);
     this.toastr.error('Menu deleted!');
   }

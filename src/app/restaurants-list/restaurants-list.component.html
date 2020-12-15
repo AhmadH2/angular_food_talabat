@@ -1,6 +1,10 @@
 
 <div class="container">
     <br>
+    <div>
+        <h2>Student:</h2>
+        <p>{{student}}</p>
+    </div>
     <span>Filter by </span>
     <select  (change)="filter($event.target.value)">
         <option *ngFor="let item of [ 'Name', 'Rating', 'City']" value={{item}}>{{item}}</option>
@@ -9,7 +13,7 @@
     <br>
     <div class="row" *ngIf="restaurants.length>0">
         <app-restaurant-item *ngFor="let restaurant of restaurants"
-         [restaurant]="restaurant"></app-restaurant-item>
+         [restaurant]="restaurant" (delete)="update()"></app-restaurant-item>
     </div>
     <div *ngIf="restaurants.length==0">
         There is NO any restaurants to show!!

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Restaurant } from '../restaurant';
 import { RestaurantService } from '../restaurant.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
@@ -17,14 +17,17 @@ export class RestaurantItemComponent implements OnInit {
   rating: number[] = [];
 
   closeResult: string;
-  isAdmin:boolean
-
+  isAdmin:boolean;
+  responseText = '';
+  
+  @Output()
+  delete = new EventEmitter<any>();
 
   constructor(public restaurantService: RestaurantService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     let rat = 0;
-    let restsRating = this.restaurantService.getRatingsById(this.restaurant.id);
+    let restsRating = this.restaurantService.getRatingsById(this.restaurant._id);
     for (let i = 0; i < restsRating.length; i++) {
       rat = Math.round(rat) + Math.round(restsRating[i].rating);
     }
@@ -36,8 +39,10 @@ export class RestaurantItemComponent implements OnInit {
     this.isAdmin = this.restaurantService.isAdmin;
   }
 
-  deleteRest() {
-    this.restaurantService.deleteRestaurant(this.restaurant);
+  async deleteRest() {
+    await this.restaurantService.deleteRestaurant(this.restaurant).subscribe();
+    this.delete.emit()
+
   }
 
   open(content) {
@@ -50,12 +55,12 @@ export class RestaurantItemComponent implements OnInit {
 
   rate(rating:number) {
     let rate = new RestaurantRating(this.restaurantService.getRatings().length, 
-    this.restaurant.id, 0, rating, 'today');
+    this.restaurant._id, 0, rating, 'today');
 
     this.restaurantService.addRating(rate);
 
     let rat:number = 0.0;
-    let restsRating = this.restaurantService.getRatingsById(this.restaurant.id);
+    let restsRating = this.restaurantService.getRatingsById(this.restaurant._id);
 
     for(let i=0; i<restsRating.length; i++) {
       
@@ -81,7 +86,5 @@ export class RestaurantItemComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
-
 
 }

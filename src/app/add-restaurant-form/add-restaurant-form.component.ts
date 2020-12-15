@@ -13,8 +13,9 @@ export class AddRestaurantFormComponent implements OnInit {
 
   cities: string[] = ['Yatta', 'Hebron', 'Dora'];
 
-  model = new Restaurant(this.restaurantService.getRestaurants().length, '',  '', 0, 0, '');
+  model = new Restaurant('', '',  '', 0, 0, '', '');
 
+  responseText = "";
   constructor(public restaurantService: RestaurantService) { }
 
   ngOnInit(): void {
@@ -22,12 +23,21 @@ export class AddRestaurantFormComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
+    
 
   }
 
   newRestaurant() {
-    this.restaurantService.addRestaurant(this.model);
-    this.model = new Restaurant(this.restaurantService.getRestaurants().length, '', '', 0, 0, '',);
+    // this.restaurantService.addRestaurant(this.model);
+    this.restaurantService.addRestaurant(this.model).subscribe(
+      (data) => this.responseText = JSON.stringify(data),
+      (error) => this.responseText = error
+    )
+    // this.restaurantService.getRestaurants().subscribe(
+    //   (rest: Restaurant[]) => this.model = rest,
+    //   (err) => console.log(err),
+    // );
+    this.model = new Restaurant('', '', '', 0, 0, '','');
   }
 
 

@@ -9,15 +9,14 @@ import { OrderedMenuItemsComponent } from './ordered-menu-items/ordered-menu-ite
 import { RestaurantsListComponent } from './restaurants-list/restaurants-list.component';
 
 const routes: Routes = [
-  { path: "menus/:rest_id", component:MenusListComponent},
+  { path: "restaurants/menus/:id", component:MenusListComponent},
   { path: 'restaurants', component: RestaurantsListComponent },
   { path: 'addRest', component: AddRestaurantFormComponent },
   { path: 'addMenu', component: AddMenuFormComponent },
   { path: 'orders', component: OrderedListComponent },
   { path: 'ordersMenu/:rest_id', component: OrderedMenuItemsComponent },
   { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/restaurants', pathMatch: 'full' },
-  { path: '**', redirectTo: '/restaurants', pathMatch: 'full' }
+
 
 ];
 
