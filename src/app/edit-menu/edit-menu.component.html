@@ -1,6 +1,6 @@
 <ng-template #content let-modal>
     <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Restaurant update</h4>
+        <h4 class="modal-title" id="modal-basic-title">Menu update</h4>
         <button type="button" class="close" aria-label="Close" 
         (click)="modal.dismiss('Cross click')">
             <span aria-hidden="true">&times;</span>
@@ -24,40 +24,42 @@
                 <label for="restaurantName">Restaurant</label>
                 <select required [(ngModel)]="model.rest_id" name='restaurantName' 
                 type='select' id='restaurantName' class="form-control">
-                    <option value="" *ngFor="let r of rests" [value]="r.id">{{r.name}}</option>
+                    <option *ngFor="let r of restaurants" [value]="r.id">{{r.name}}</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="descr">description</label>
-                <input required type="input" [(ngModel)]='model.descr' name='descr' class="form-control" id="descr"
-                    #_descr="ngModel">
+                <input required type="input" [(ngModel)]='model.descr' name='descr' 
+                class="form-control" id="descr" #_descr="ngModel">
 
-                <div *ngIf='_descr.touched && !_descr.valid && _descr.errors.required' class="alert alert-danger">
+                <div *ngIf='_descr.touched && !_descr.valid && _descr.errors.required'
+                 class="alert alert-danger">
                     description is required!
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="price">Price</label>
-                <input required type="input" [(ngModel)]='model.price' name='price' class="form-control" id="price"
+                <input required type="input" [(ngModel)]='model.price' name='price' 
+                class="form-control" id="price"
                     #_price="ngModel">
 
-                <div *ngIf='_price.touched && !_price.valid && _price.errors.required' class="alert alert-danger">
+                <div *ngIf='_price.touched && !_price.valid && _price.errors.required' 
+                class="alert alert-danger">
                     Price is required!
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="img">Image</label>
-                <input [(ngModel)]='model.image' type="text" name='img' class="form-control" id="img" #_img="ngModel">
+                <input [(ngModel)]='model.image' type="text" name='img' class="form-control"
+                 id="img" #_img="ngModel">
             </div>
 
             <button type="submit" class="btn btn-primary"
                 [disabled]="editMenuForm.form.invalid" >Save</button>
         </form>
-
-
 
     </div>
 

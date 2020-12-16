@@ -4,6 +4,7 @@ import { Orders } from '../orders';
 import { RestaurantService } from '../restaurant.service';
 import {Location} from '@angular/common'
 import { ToastrService } from 'ngx-toastr';
+import { Restaurant } from '../restaurant';
 
 @Component({
   selector: 'app-ordered-item',
@@ -16,6 +17,8 @@ export class OrderedItemComponent implements OnInit {
   order: Orders;
   menu:Menu;
   restName:string;
+  menus: Menu[];
+  restaurants: Restaurant[];
 
   @Output()
   delete = new EventEmitter<Orders>();
@@ -23,12 +26,25 @@ export class OrderedItemComponent implements OnInit {
   constructor(private restaurantService: RestaurantService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.restName = this.restaurantService.getRestName(this.order.rest_id);
-    this.menu = this.restaurantService.getMenuItem(this.order.rest_id, this.order.menu_id);
+    this.restaurantService.getRestaurants().subscribe(
+      (rest: Restaurant[]) => {
+        this.restaurants = rest;
+        this.restName = this.restaurants.filter((rest) => rest.id == this.order.rest_id)[0].name;
+      },
+      (err) => console.log(err),
+    );
+    this.restaurantService.getMenusById(this.order.rest_id).subscribe(
+      (menus: Menu[]) => {
+        this.menus = menus;
+        this.menu = this.menus.filter((menu) => (menu.rest_id == this.order.rest_id) && (menu.id == this.order.menu_id))[0];
+      },
+      (err) => console.log(err),
+    );
+
   }
 
-  deletOrder(){
-    this.restaurantService.deleteOrder(this.order);
+  async deletOrder(){
+    await this.restaurantService.deleteOrder(this.order).subscribe();
     this.toastr.error('Item deleted!');
     this.delete.emit(this.order);
     

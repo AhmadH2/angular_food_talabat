@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Menu } from '../menu';
+import { Orders } from '../orders';
 import { Restaurant } from '../restaurant';
 import { RestaurantService } from '../restaurant.service';
 
@@ -76,10 +77,12 @@ export class MenuItemComponent implements OnInit {
       return `with: ${reason}`;
     }
   }
-
+  
   order(quantity:number) {
     if(quantity > 0 && quantity < 300) {
-      this.restaurantService.orderItem(this.menu, quantity);
+      let order = new Orders('0', this.menu.rest_id, this.menu.id,
+        this.restaurantService.customer_id, quantity, '10/10/202');
+      this.restaurantService.orderItem(order).subscribe();
       this.toastr.success("item added to orders list!");
     }
     this.modalService.dismissAll();

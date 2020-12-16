@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-// import { RestaurantService } from 'src/app/services/restaurant.service';
 import { Menu } from '../menu';
 import { Restaurant } from '../restaurant';
 import { RestaurantService } from '../restaurant.service';
@@ -12,24 +11,20 @@ import { RestaurantService } from '../restaurant.service';
 })
 export class EditMenuComponent implements OnInit {
   @Input() menu: Menu;
-  rests: Restaurant[];
+  restaurants: Restaurant[];
 
-  model:Menu = new Menu('', '', '', '', 0, '');
+  model: Menu;
 
   @Output()
   edit = new EventEmitter<Menu>();
 
-  constructor(private modalService: NgbModal, private res: RestaurantService) { }
+  constructor(private modalService: NgbModal, private restaurantService: RestaurantService) { }
 
   ngOnInit(): void {
-    this.res.getRestaurants().subscribe(
-      (rest: Restaurant[]) => this.rests = rest,
+    this.restaurantService.getRestaurants().subscribe(
+      (rest: Restaurant[]) => this.restaurants = rest,
     );
-    this.model.id = this.menu.id;
-    this.model.name = this.menu.name;
-    this.model.descr = this.menu.descr;
-    this.model.price = this.menu.price;
-    this.model.image = this.menu.image;
+    this.model = Object.assign({}, this.menu);
 
   }
 
@@ -37,22 +32,17 @@ export class EditMenuComponent implements OnInit {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
   }
 
-  
-
   onSubmit() {
+    console.log('hiiii from onsubmit');
 
-    this.menu.id = this.model.id;
+    this.restaurantService.editMenu(this.model).subscribe();
     this.menu.name = this.model.name;
     this.menu.descr = this.model.descr;
     this.menu.price = this.model.price;
-
     this.menu.rest_id = this.model.rest_id;
     this.menu.image = this.model.image;
-
-    this.res.editMenu(this.menu);
-    this.edit.emit(this.menu);
-    this.res.editMenu(this.menu).subscribe;
     this.modalService.dismissAll();
     
   }
+
 }

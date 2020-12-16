@@ -37,7 +37,7 @@ export class EditRestaurantComponent implements OnInit {
     this.restaurant.lat = this.model.lat;
     this.restaurant.lng = this.model.lng;
     this.restaurant.phone = this.model.phone;
-    this.modalService.dismissAll();
+    // this.modalService.dismissAll();
     this.restaurant.image=this.model.image;
 
   }
@@ -50,7 +50,7 @@ export class EditRestaurantComponent implements OnInit {
     this.restaurant.lat = this.model.lat;
     this.restaurant.lng = this.model.lng;
     this.restaurant.phone = this.model.phone;
-    this.modalService.dismissAll();
+    // this.modalService.dismissAll();
     this.restaurant.image = this.model.image;
     this.restaurantService.editRestaurant(this.restaurant).subscribe();
     this.modalService.dismissAll();

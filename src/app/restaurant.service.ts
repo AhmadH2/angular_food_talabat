@@ -33,8 +33,8 @@ export class RestaurantService {
     new Customer('2', 'Ali', 'Horyzat', '999'),
   ];
 
-  customer_id = '-1';
-  url = 'http://localhost:9000/students/5fd7d0d3f774a1230c6db5d1';
+  customer_id = '5fd9069de6ba0405e413f476';
+  url = 'http://localhost:9000';
 
   private adminList= ['Ahmad'];
 
@@ -46,15 +46,16 @@ export class RestaurantService {
 
   getRestaurants(): Observable<Object> {
     return this.http.get('http://localhost:9000/restaurants');
-    // return this.restaurants.sort((a,b) => (a.name > b.name)?1:-1);
+  }
+
+  getMenus(): Observable<Object> {
+    return this.http.get(this.url + '/menus');
   }
 
   getMenusById(rest_id: string): Observable<Object> {
-    // console.log('idddddddddd' + rest_id);
     let url = 'http://localhost:9000/menus/' + rest_id;
     console.log(url);
     return this.http.get('http://localhost:9000/menus/' + rest_id);
-    // return this.menus.filter((menu) => menu.rest_id == rest_id).sort((a, b) => (a.name > b.name) ? 1 : -1);
   }
 
   addRestaurant(restaurant: Restaurant): Observable<Object> {
@@ -94,12 +95,11 @@ export class RestaurantService {
   }
 
   deleteMenu(menu: Menu):Observable<Object> {
-    console.log(menu.id);
     return this.http.delete("http://localhost:9000/menus/" + menu.id);
   }
 
   deleteRestaurant(restaurant: Restaurant) {
-    return this.http.delete("http://localhost:9000/restaurants/" + restaurant._id);
+    return this.http.delete("http://localhost:9000/restaurants/" + restaurant.id);
   }
 
   editRestaurant(restaurant: Restaurant):Observable<Object> {
@@ -116,7 +116,7 @@ export class RestaurantService {
       "phone": restaurant.phone,
       "image": restaurant.image
     }
-    return this.http.put('http://localhost:9000/restaurants/' + restaurant._id, body, httpOptions);
+    return this.http.put(this.url + '/restaurants/' + restaurant.id, body, httpOptions);
   }
 
   editMenu(menu: Menu) {
@@ -125,15 +125,39 @@ export class RestaurantService {
         "Content-Type": "application/json"
       })
     }
-
     let body = {
-      "name": menu.name,
       "rest_id": menu.rest_id,
+      "name": menu.name,
       "descr": menu.descr,
       "price": menu.price,
       "image": menu.image
     }
     return this.http.put('http://localhost:9000/menus/' + menu.id, body, httpOptions);
+  }
+
+  getOrdersByCustomer(customer_id:string):Observable<Object> {
+    return this.http.get(this.url + '/orders');
+  }
+
+  orderItem(order:Orders):Observable<Object> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+    }
+
+    let body = {
+      "rest_id": order.rest_id,
+      "menu_id": order.menu_id,
+      "customer_id": order.customer_id,
+      "quantity": order.quantity,
+      "date_created": order.date_created,
+    }
+    return this.http.post(this.url + '/orders/', body, httpOptions);
+  }
+
+  deleteOrder(order: Orders):Observable<Object> {
+    return this.http.delete(this.url + '/orders/' + order.id);
   }
 
   
@@ -188,24 +212,16 @@ export class RestaurantService {
     
   }
 
-  orderItem(item:Menu, quantity:number) {
-
-    this.ordersList.push(new Orders('k', item.rest_id, item.id,this.customer_id, quantity, 'today'));
-  }
-
-  deleteOrder(order:Orders) {
-    let index = this.ordersList.indexOf(order);
-    this.ordersList.splice(index, 1); 
-  }
+  
 
   getRestName(rest_id:string):string{
-    return this.restaurants.filter((rest) => rest._id == rest_id)[0].name;
+    return this.restaurants.filter((rest) => rest.id == rest_id)[0].name;
   }
 
 
-  getMenus(): Menu[] {
-    return this.menus.sort((a, b) => (a.name < b.name)?1:-1);
-  }
+  // getMenus(): Menu[] {
+  //   return this.menus.sort((a, b) => (a.name < b.name)?1:-1);
+  // }
 
 
   rateRestaurant(rating:number, restaurant:Restaurant) {

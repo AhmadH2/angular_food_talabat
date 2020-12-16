@@ -4,7 +4,8 @@
 
     <div class="form-group">
         <label for="restaurant">Restaurant</label>
-        <select (change)="filter($event.target.value)" name="restaurant" id="restaurant">
+        <!-- (change)="filter($event.target.value)" -->
+        <select  name="restaurant" id="restaurant">
             <option value="" *ngFor="let restaurant of restaurants" [value]="restaurant.id">{{restaurant.name}}</option>
         </select>
     
