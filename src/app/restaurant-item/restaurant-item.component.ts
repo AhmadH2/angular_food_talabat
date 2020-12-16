@@ -15,6 +15,7 @@ export class RestaurantItemComponent implements OnInit {
   @Input()
   restaurant: Restaurant;
   rating: number[] = [];
+  restRatings: RestaurantRating[];
 
   closeResult: string;
   isAdmin:boolean;
@@ -26,16 +27,24 @@ export class RestaurantItemComponent implements OnInit {
   constructor(public restaurantService: RestaurantService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    let rat = 0;
-    let restsRating = this.restaurantService.getRatingsById(this.restaurant.id);
-    for (let i = 0; i < restsRating.length; i++) {
-      rat = Math.round(rat) + Math.round(restsRating[i].rating);
-    }
-    rat = rat / restsRating.length;
-    this.rating = [];
-    for (let i = 0; i < rat; i++) {
-      this.rating.push(i);
-    }
+    this.restaurantService.getRatingsByRest_Id(this.restaurant.id).subscribe(
+      (ratings:RestaurantRating[]) => {
+        this.restRatings = ratings;
+        let rat = 0;
+        for (let i = 0; i < this.restRatings.length; i++) {
+          console.log("rating is;  : " + this.restRatings[i].rating);
+          rat = Math.round(rat) + Math.round(this.restRatings[i].rating);
+        }
+        rat = rat / this.restRatings.length;
+        this.rating = [];
+        for (let i = 0; i < rat; i++) {
+          this.rating.push(i);
+        }
+      },
+      (err) => console.log(err) 
+    );
+
+    
     this.isAdmin = this.restaurantService.isAdmin;
   }
 
@@ -54,24 +63,24 @@ export class RestaurantItemComponent implements OnInit {
   }
 
   rate(rating:number) {
-    let rate = new RestaurantRating(this.restaurantService.getRatings().length, 
-    this.restaurant.id, 0, rating, 'today');
+    let rate = new RestaurantRating('', this.restaurant.id, this.restaurantService.customer_id,
+     rating, '12/12/2020');
 
-    this.restaurantService.addRating(rate);
+    this.restaurantService.addRating(rate).subscribe();
 
-    let rat:number = 0.0;
-    let restsRating = this.restaurantService.getRatingsById(this.restaurant.id);
+    // let rat:number = 0.0;
+    // // let restsRating = this.restaurantService.getr(this.restaurant.id);
 
-    for(let i=0; i<restsRating.length; i++) {
+    // for(let i=0; i<this.restRatings.length; i++) {
       
-      rat = Math.round(rat) + Math.round(restsRating[i].rating);
-    }
+    //   rat = Math.round(rat) + Math.round(this.restRatings[i].rating);
+    // }
 
-    rat = rat / restsRating.length;
-    this.rating = [];
-    for (let i = 0; i < rat; i++) {
-      this.rating.push(i);
-    }
+    // rat = rat / this.restRatings.length;
+    // this.rating = [];
+    // for (let i = 0; i < rat; i++) {
+    //   this.rating.push(i);
+    // }
 
 
     this.modalService.dismissAll();

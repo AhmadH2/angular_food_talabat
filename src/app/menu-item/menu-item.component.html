@@ -3,7 +3,6 @@
     <div style="height: 450px">
         <img class="card-img-top" [src]="menu.image" alt="Card image" style="height:100%">
     </div>
-    <div *ngIf="isOrdered" style="font-size: 24px;">{{restName}}</div>
     <div class="card-img-overlay">
         <div class="content">
             <h4 class="card-title" style="color: white;">{{menu.name}}</h4>
@@ -13,9 +12,6 @@
             <p style="color: white;">{{menu.descr}}</p>
             <p class="card-text" style="color: white;">
                 ${{menu.price}}
-            </p>
-            <p *ngIf="isOrdered" class="card-text" style="color: white;">
-                {{menu.quantity}} Pieces
             </p>
             <div class="row-btns">
                 <app-edit-menu  [menu]="menu" (edit)="editMenu($event)"></app-edit-menu>

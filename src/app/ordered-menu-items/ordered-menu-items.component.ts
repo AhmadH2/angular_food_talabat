@@ -19,7 +19,10 @@ export class OrderedMenuItemsComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('rest_id');
-    this.orders = this.restaurantService.getOrdersByRestId(this.id);
+    this.restaurantService.getOrdersByRestId(this.id).subscribe(
+      (orders:Orders[]) => this.orders = orders,
+      (err) => console.log(err)
+    );
   }
 
   goBack() {

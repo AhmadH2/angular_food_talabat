@@ -160,115 +160,133 @@ export class RestaurantService {
     return this.http.delete(this.url + '/orders/' + order.id);
   }
 
+  getOrdersByRestId(rest_id: string):Observable<Object> {
+    return this.http.get(this.url + '/orders/' + rest_id);
+  }
+
+  getRatingsByRest_Id(rest_id: string):Observable<Object> {
+    return this.http.get(this.url + '/restRatig/' + rest_id);
+    // return this.ratingList.filter((element) => element.rest_id == rest_id);
+  }
+
+  addRating(rate: RestaurantRating):Observable<Object> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+    }
+
+    let body = {
+      "rest_id": rate.rest_id,
+      "customer_id": rate.customer_id,
+      "rating": rate.rating,
+      "date_rated": rate.date_rated,
+    }
+    return this.http.post(this.url + '/restRatig/', body, httpOptions);
+    // this.ratingList.push(rate);
+  }
   
 
 
 
 
 
-  getLogInf(){
-    return this.loggedIn;
-  }
+  // getLogInf(){
+  //   return this.loggedIn;
+  // }
 
   getCustomers(): Customer[] {
     return this.customers;
   }
 
-  getAdminList():string[] {
-    return this.adminList;
-  }
+  // getAdminList():string[] {
+  //   return this.adminList;
+  // }
 
   
 
-  getRatings(): RestaurantRating[] {
-    return this.ratingList;
-  }
-
-  getRatingsById(rest_id:string) {
-    return this.ratingList.filter((element)=> element.rest_id==rest_id);
-  }
-
-  addRating(rate:RestaurantRating) {
-    this.ratingList.push(rate);
-  }
-
-  
-  getOrders(): Orders[] {
-    return this.ordersList;
-  }
-
-  getOrdersByRestId(rest_id:string) {
-    return this.ordersList.filter((order)=> order.rest_id == rest_id);
-  }
-
-  isOrdered(menu: Menu): boolean {
-
-    for (let i = 0; i < this.ordersList.length; i++) {
-      if ((menu.id == this.ordersList[i].menu_id) && (menu.rest_id == this.ordersList[i].rest_id)) {
-        return true;
-      }
-    }
-    return false;
-    
-  }
+  // getRatings(): RestaurantRating[] {
+  //   return this.ratingList;
+  // }
 
   
 
-  getRestName(rest_id:string):string{
-    return this.restaurants.filter((rest) => rest.id == rest_id)[0].name;
-  }
+  
 
-
-  // getMenus(): Menu[] {
-  //   return this.menus.sort((a, b) => (a.name < b.name)?1:-1);
+  
+  // getOrders(): Orders[] {
+  //   return this.ordersList;
   // }
 
 
-  rateRestaurant(rating:number, restaurant:Restaurant) {
-    let index = this.restaurants.indexOf(restaurant);
-    this.restaurants[index].rating = rating;
-    console.log(this.restaurants[index].rating);
-  }
+  // isOrdered(menu: Menu): boolean {
 
-  rateMenu(rating:number, menu:Menu) {
-    let index = this.menus.indexOf(menu);
-    this.menus[index].rating = rating;
-    console.log(this.menus[index].rating);
-  }
+  //   for (let i = 0; i < this.ordersList.length; i++) {
+  //     if ((menu.id == this.ordersList[i].menu_id) && (menu.rest_id == this.ordersList[i].rest_id)) {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+    
+  // }
 
   
 
-  filterRest(method:string):Restaurant[] {
-    method = method.toLowerCase();
-    if(method == 'rating') {
-      return this.restaurants.sort((a, b) => (a.rating < b.rating) ? 1 : -1);
-    }
-    if (method == 'city') {
-      return this.restaurants.sort((a, b) => (a.city > b.city) ? 1 : -1);
+  // getRestName(rest_id:string):string{
+  //   return this.restaurants.filter((rest) => rest.id == rest_id)[0].name;
+  // }
+
+
+  // // getMenus(): Menu[] {
+  // //   return this.menus.sort((a, b) => (a.name < b.name)?1:-1);
+  // // }
+
+
+  // rateRestaurant(rating:number, restaurant:Restaurant) {
+  //   let index = this.restaurants.indexOf(restaurant);
+  //   this.restaurants[index].rating = rating;
+  //   console.log(this.restaurants[index].rating);
+  // }
+
+  // rateMenu(rating:number, menu:Menu) {
+  //   let index = this.menus.indexOf(menu);
+  //   this.menus[index].rating = rating;
+  //   console.log(this.menus[index].rating);
+  // }
+
+  
+
+  // filterRest(method:string):Restaurant[] {
+  //   method = method.toLowerCase();
+  //   if(method == 'rating') {
+  //     return this.restaurants.sort((a, b) => (a.rating < b.rating) ? 1 : -1);
+  //   }
+  //   if (method == 'city') {
+  //     return this.restaurants.sort((a, b) => (a.city > b.city) ? 1 : -1);
     
-    }
-    else {
-      return this.restaurants.sort((a, b) => (a.name > b.name) ? 1 : -1);
-    }
-  }
+  //   }
+  //   else {
+  //     return this.restaurants.sort((a, b) => (a.name > b.name) ? 1 : -1);
+  //   }
+  // }
 
-  filterMenus(method:string):Menu[] {
-    method = method.toLowerCase();
-    if (method == 'rating') {
-      return this.menus.sort((a, b) => (a.rating < b.rating) ? 1 : -1);
-    }
-    else {
-      return this.menus.sort((a, b) => (a.name > b.name) ? 1 : -1);
-    }
+  // filterMenus(method:string):Menu[] {
+  //   method = method.toLowerCase();
+  //   if (method == 'rating') {
+  //     return this.menus.sort((a, b) => (a.rating < b.rating) ? 1 : -1);
+  //   }
+  //   else {
+  //     return this.menus.sort((a, b) => (a.name > b.name) ? 1 : -1);
+  //   }
 
-  }
+  // }
 
-  getMenuItem(rest_id: string, menu_id: string):Menu {
-    return this.menus.filter((menu) => (menu.rest_id==rest_id) && (menu.id==menu_id))[0];
-  }
+  // getMenuItem(rest_id: string, menu_id: string):Menu {
+  //   return this.menus.filter((menu) => (menu.rest_id==rest_id) && (menu.id==menu_id))[0];
+  // }
 
-  getMenuOfOrder(order:Orders) {
-    return this.menus.filter((menu) => (menu.rest_id == order.rest_id) && (menu.id == order.menu_id))[0];
-  }
+  // getMenuOfOrder(order:Orders) {
+  //   return this.menus.filter((menu) => (menu.rest_id == order.rest_id) && (menu.id == order.menu_id))[0];
+  // }
     
 }

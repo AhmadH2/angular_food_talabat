@@ -10,7 +10,7 @@ import { Student } from '../student';
 })
 export class RestaurantsListComponent implements OnInit {
 
-  restaurants: Restaurant[];
+  restaurants: Restaurant[] = [];
   filterMethod:string;
   student: string;
 

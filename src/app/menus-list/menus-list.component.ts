@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./menus-list.component.css']
 })
 export class MenusListComponent implements OnInit {
-  menus: Menu[];
+  menus: Menu[] = [];
   id:string;
   isAdmin:boolean;
 
@@ -35,9 +35,9 @@ export class MenusListComponent implements OnInit {
     this.location.back();
   }
 
-  filter(value) {
-    this.menus = this.restaurantService.filterMenus(value);
-  }
+  // filter(value) {
+  //   this.menus = this.restaurantService.filterMenus(value);
+  // }
 
   delete(value) {
     let index = this.menus.indexOf(value);

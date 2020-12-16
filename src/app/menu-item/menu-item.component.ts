@@ -20,9 +20,6 @@ export class MenuItemComponent implements OnInit {
 
   closeResult: string;
 
-  @Input()
-  isOrdered:boolean;
-
   @Output()
   delete = new EventEmitter<Menu>();
 
@@ -30,8 +27,6 @@ export class MenuItemComponent implements OnInit {
   edit = new EventEmitter<Menu>();
 
   isAdmin:boolean;
-
-  restName:string;
 
   constructor(private restaurantService: RestaurantService, private modalService: NgbModal,
     private toastr: ToastrService) { }
@@ -42,7 +37,6 @@ export class MenuItemComponent implements OnInit {
     }
 
     // this.isOrdered = this.restaurantService.isOrdered(this.menu);
-    this.restName = this.restaurantService.getRestName(this.menu.rest_id);
     this.isAdmin = this.restaurantService.isAdmin;
   }
 
@@ -59,7 +53,7 @@ export class MenuItemComponent implements OnInit {
   }
 
   rate(rating: number) {
-    this.restaurantService.rateMenu(rating, this.menu);
+    // this.restaurantService.rateMenu(rating, this.menu);
     this.menu.rating = rating;
     this.rating = [];
     for(let i=0; i<rating; i++) {

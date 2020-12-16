@@ -12,7 +12,7 @@
     <button class="btn btn-outline-success" (click)="goBack()">Go back</button>
 
     <div class="row" *ngIf="menus.length>0">
-        <app-menu-item *ngFor="let menu of menus" [menu]="menu" [isOrdered]="false"
+        <app-menu-item *ngFor="let menu of menus" [menu]="menu"
          (delete)="delete($event)" (edit)="editMenu($event)"></app-menu-item>
     </div>
 
