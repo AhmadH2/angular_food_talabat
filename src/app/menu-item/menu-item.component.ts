@@ -36,8 +36,7 @@ export class MenuItemComponent implements OnInit {
       this.rating.push(i);
     }
 
-    // this.isOrdered = this.restaurantService.isOrdered(this.menu);
-    this.isAdmin = this.restaurantService.isAdmin;
+    this.isAdmin = localStorage.getItem('isAdmin') == 'true';
   }
 
   deleteMenu() {

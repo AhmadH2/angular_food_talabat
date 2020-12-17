@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RestaurantService } from './restaurant.service';
 import { Student } from './student';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

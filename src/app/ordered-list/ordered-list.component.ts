@@ -55,7 +55,7 @@ export class OrderedListComponent implements OnInit {
   calcPrice():number {
     let total = 0;
     this.orders.forEach(
-      order => total += 4 * order.quantity);
+      order => total += this.getMenuOfOrder(order).price * order.quantity);
     console.log(total);
     return total;
   }

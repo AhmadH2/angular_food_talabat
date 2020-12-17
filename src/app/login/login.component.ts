@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
         else {
           this.message = "Access Denide, Invalid username or password";
           localStorage.setItem('token', 'invalid token');
+          localStorage.setItem('isAdmin', 'false');
         }
 
       }

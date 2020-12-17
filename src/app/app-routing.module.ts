@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { MenusListComponent } from './menus-list/menus-list.component';
 import { OrderedListComponent } from './ordered-list/ordered-list.component';
 import { OrderedMenuItemsComponent } from './ordered-menu-items/ordered-menu-items.component';
+import { RegisterComponent } from './register/register.component';
 import { RestaurantsListComponent } from './restaurants-list/restaurants-list.component';
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'orders', component: OrderedListComponent },
   { path: 'ordersMenu/:rest_id', component: OrderedMenuItemsComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent}
 
 
 ];

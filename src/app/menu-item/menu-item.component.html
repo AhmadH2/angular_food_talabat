@@ -14,12 +14,12 @@
                 ${{menu.price}}
             </p>
             <div class="row-btns">
-                <app-edit-menu  [menu]="menu" (edit)="editMenu($event)"></app-edit-menu>
-                <button  type="button" class="btn btn-warning" data-toggle="modal"
+                <app-edit-menu *ngIf="isAdmin"  [menu]="menu" (edit)="editMenu($event)"></app-edit-menu>
+                <button type="button" class="btn btn-warning" data-toggle="modal"
                  data-target="#exampleModal"(click)="open(mymodal)">Rate</button>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
                     (click)="open(ordermodal)">Order</button>
-                <button  class="btn btn-danger" (click)="deleteItem()">delete</button>
+                <button *ngIf="isAdmin"  class="btn btn-danger" (click)="deleteItem()">delete</button>
             </div>
         </div>
 

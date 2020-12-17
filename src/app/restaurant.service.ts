@@ -72,7 +72,7 @@ export class RestaurantService {
   addRestaurant(restaurant: Restaurant): Observable<Object> {
     const httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       })
     }
     let body = {
@@ -90,7 +90,7 @@ export class RestaurantService {
   addMenu(menu: Menu):Observable<Object> {
     const httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       })
     }
 
@@ -222,6 +222,25 @@ export class RestaurantService {
       }),
     }
     return this.http.post(this.url + '/users/login', body, httpOptions)
+  }
+
+  register(customer:Customer) {
+
+    // let header = new HttpHeaders().set("Authorization", localStorage.getItem('token'));
+
+    let body = {
+      "username": customer.username,
+      "last_name": customer.last_name,
+      "phone": customer.phone,
+      "password": customer.password
+
+    }
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+      }),
+    }
+    return this.http.post(this.url + '/users/register', body, httpOptions)
   }
 
 

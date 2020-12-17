@@ -21,6 +21,7 @@ import { OrderedItemComponent } from './ordered-item/ordered-item.component';
 import { LoginComponent } from './login/login.component';
 import { OrderedMenuItemsComponent } from './ordered-menu-items/ordered-menu-items.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { HttpClientModule } from '@angular/common/http';
     OrderedItemComponent,
     LoginComponent,
     OrderedMenuItemsComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

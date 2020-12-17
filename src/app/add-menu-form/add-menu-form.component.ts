@@ -39,7 +39,6 @@ export class AddMenuFormComponent implements OnInit {
       (error) => this.responseText = error
     )
     this.model = new Menu('', '', '', '', 0, '');
-    console.log(this.menus[0]);
   }
 
 }
