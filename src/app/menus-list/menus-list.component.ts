@@ -25,7 +25,7 @@ export class MenusListComponent implements OnInit {
   
     // this.id = this.route.snapshot.paramMap.get('rest_id');
     this.restaurantService.getMenusById(this.id).subscribe(
-      (men:Menu[]) => this.menus = men,
+      (men:Menu[]) => this.menus = men.sort((a,b)=> (a.name > b.name)?1:-1),
       (err) => console.log(err)
     );
     this.isAdmin = this.restaurantService.isAdmin;
@@ -38,6 +38,18 @@ export class MenusListComponent implements OnInit {
   // filter(value) {
   //   this.menus = this.restaurantService.filterMenus(value);
   // }
+
+  filter(method: string): Menu[] {
+    method = method.toLowerCase();
+    if (method == 'rating') {
+      return this.menus.sort((a, b) => (a.rating < b.rating) ? 1 : -1);
+    }
+    else {
+      return this.menus.sort((a, b) => (a.name > b.name) ? 1 : -1);
+    }
+
+  }
+
 
   delete(value) {
     let index = this.menus.indexOf(value);

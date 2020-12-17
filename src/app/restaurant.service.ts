@@ -33,7 +33,7 @@ export class RestaurantService {
     new Customer('2', 'Ali', 'Horyzat', '999'),
   ];
 
-  customer_id = '5fd9069de6ba0405e413f476';
+  customer_id = localStorage.getItem('customer_id');
   url = 'http://localhost:9000';
 
   private adminList= ['Ahmad'];
@@ -45,7 +45,20 @@ export class RestaurantService {
   }
 
   getRestaurants(): Observable<Object> {
-    return this.http.get('http://localhost:9000/restaurants');
+  //   var headers_object = new HttpHeaders({
+  //     'Content-Type': 'application/json',
+  //     'Authorization': "Bearer " + t)
+  // });
+
+  // const httpOptions = {
+  //   headers: headers_object
+  // };
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Authorization": localStorage.getItem('token')
+      })
+    }
+    return this.http.get('http://localhost:9000/restaurants', httpOptions);
   }
 
   getMenus(): Observable<Object> {
@@ -53,8 +66,6 @@ export class RestaurantService {
   }
 
   getMenusById(rest_id: string): Observable<Object> {
-    let url = 'http://localhost:9000/menus/' + rest_id;
-    console.log(url);
     return this.http.get('http://localhost:9000/menus/' + rest_id);
   }
 
@@ -136,7 +147,12 @@ export class RestaurantService {
   }
 
   getOrdersByCustomer(customer_id:string):Observable<Object> {
-    return this.http.get(this.url + '/orders');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Authorization": localStorage.getItem('token')
+      })
+    }
+    return this.http.get(this.url + '/orders/byCustomer/' + customer_id, httpOptions);
   }
 
   orderItem(order:Orders):Observable<Object> {
@@ -161,7 +177,12 @@ export class RestaurantService {
   }
 
   getOrdersByRestId(rest_id: string):Observable<Object> {
-    return this.http.get(this.url + '/orders/' + rest_id);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Authorization": localStorage.getItem('token')
+      })
+    }
+    return this.http.get(this.url + '/orders/' + rest_id, httpOptions);
   }
 
   getRatingsByRest_Id(rest_id: string):Observable<Object> {
@@ -185,7 +206,23 @@ export class RestaurantService {
     return this.http.post(this.url + '/restRatig/', body, httpOptions);
     // this.ratingList.push(rate);
   }
-  
+
+  login(username:string, password:string) {
+
+    // let header = new HttpHeaders().set("Authorization", localStorage.getItem('token'));
+
+    let body = { 
+      "username": username,
+      "password": password
+      
+    }
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+      }),
+    }
+    return this.http.post(this.url + '/users/login', body, httpOptions)
+  }
 
 
 
@@ -199,9 +236,9 @@ export class RestaurantService {
     return this.customers;
   }
 
-  // getAdminList():string[] {
-  //   return this.adminList;
-  // }
+  getAdminList():string[] {
+    return this.adminList;
+  }
 
   
 

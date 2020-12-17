@@ -15,7 +15,7 @@ export class OrderedItemComponent implements OnInit {
 
   @Input()
   order: Orders;
-  menu:Menu;
+  menu:Menu = new Menu('', '', '', '', 5, '');
   restName:string;
   menus: Menu[];
   restaurants: Restaurant[];

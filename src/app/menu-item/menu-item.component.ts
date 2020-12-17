@@ -75,7 +75,7 @@ export class MenuItemComponent implements OnInit {
   order(quantity:number) {
     if(quantity > 0 && quantity < 300) {
       let order = new Orders('0', this.menu.rest_id, this.menu.id,
-        this.restaurantService.customer_id, quantity, '10/10/202');
+        localStorage.getItem("customer_id"), quantity, '10/10/2022');
       this.restaurantService.orderItem(order).subscribe();
       this.toastr.success("item added to orders list!");
     }

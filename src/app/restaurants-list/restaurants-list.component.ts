@@ -13,6 +13,7 @@ export class RestaurantsListComponent implements OnInit {
   restaurants: Restaurant[] = [];
   filterMethod:string;
   student: string;
+  isAdmin:boolean;
 
   constructor(public restaurantService: RestaurantService) { }
 
@@ -30,6 +31,7 @@ export class RestaurantsListComponent implements OnInit {
       },
       (err) => console.log(err)
     );
+    this.isAdmin = localStorage.getItem('isAdmin') == 'true';
   }
 
   update() {

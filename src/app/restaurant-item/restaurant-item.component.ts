@@ -46,6 +46,7 @@ export class RestaurantItemComponent implements OnInit {
 
     
     this.isAdmin = this.restaurantService.isAdmin;
+    console.log('is Admin' + this.isAdmin);
   }
 
   async deleteRest() {

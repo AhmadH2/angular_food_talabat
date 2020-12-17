@@ -1,5 +1,6 @@
-<div class="card col-6" *ngIf="!loggedIn">
+<div class="card col-6">
     <h4 class="card-header">Login</h4>
+    {{message}}
     <div class="card-body">
         <form (ngSubmit)="onSubmit()">
             <div class="form-group">
@@ -21,7 +22,7 @@
 </div>
 
 
-<div *ngIf="loggedIn">
+<!-- <div *ngIf="loggedIn">
     <app-nav-bar></app-nav-bar>
     <div class="row" style="justify-content: center;">
         <div *ngIf="isAdmin" class="col-3">
@@ -34,4 +35,4 @@
     </div>
     
     
-</div>
+</div> -->

@@ -10,6 +10,10 @@
         <option *ngFor="let item of [ 'Name', 'Rating', 'City']" value={{item}}>{{item}}</option>
     </select>
     <div> -->
+    <div *ngIf="isAdmin">
+        <a [routerLink]="['/addMenu']" routerLinkActive="router-link-active">ADd Menu</a> <br>
+        <a [routerLink]="['/addRest']" routerLinkActive="router-link-active">ADd REstaurant</a> <br>
+    </div>
     <br>
     <div class="row" *ngIf="restaurants.length>0">
         <app-restaurant-item *ngFor="let restaurant of restaurants"

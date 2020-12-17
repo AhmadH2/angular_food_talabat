@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RestaurantService } from '../restaurant.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,10 +10,12 @@ export class NavBarComponent implements OnInit {
 
   toggleNavbar = true;
   toggleBtn = false;
+  isAdmin = true
 
-  constructor() { }
+  constructor(private restaurantService: RestaurantService) { }
 
   ngOnInit(): void {
+    this.isAdmin = localStorage.getItem('isAdmin') == 'true';
   }
 
 }

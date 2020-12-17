@@ -14,20 +14,20 @@ import { Restaurant } from '../restaurant';
 })
 export class OrderedListComponent implements OnInit {
 
-  orders: Orders[];
-  restaurants: Restaurant[];
-  menus: Menu[];
+  orders: Orders[] = [];
+  restaurants: Restaurant[] = [];
+  menus: Menu[] = [];
   constructor(private restaurantService: RestaurantService, private route: ActivatedRoute,
     private location: Location) { }
 
   ngOnInit(): void {
-    // this.orders = this.restaurantService.getOrdersByRestId('');
-    this.restaurantService.getOrdersByCustomer(this.restaurantService.customer_id).subscribe(
+    this.restaurantService.getOrdersByCustomer(localStorage.getItem('customer_id')).subscribe(
       (ord:Orders[]) => {this.orders = ord;},
       (err) => console.log(err)
     );
     this.restaurantService.getRestaurants().subscribe(
       (rest: Restaurant[]) => this.restaurants = rest,
+      (err) => console.log(err)
     );
     this.restaurantService.getMenus().subscribe(
       (menus:Menu[]) => this.menus = menus,
@@ -55,7 +55,7 @@ export class OrderedListComponent implements OnInit {
   calcPrice():number {
     let total = 0;
     this.orders.forEach(
-      order => total += this.getMenuOfOrder(order).price * order.quantity);
+      order => total += 4 * order.quantity);
     console.log(total);
     return total;
   }
