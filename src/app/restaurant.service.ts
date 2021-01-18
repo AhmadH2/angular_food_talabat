@@ -21,11 +21,11 @@ export class RestaurantService {
 
 
   //fetch them from server by custom id
-  private ordersList:Orders[] = [
+  private ordersList: Orders[] = [
     new Orders('k', 'k', 'k', 'k', 2, '2020/3/3'),
   ];
 
-  private ratingList:RestaurantRating[] = [];
+  private ratingList: RestaurantRating[] = [];
 
   private customers = [
     new Customer('0', 'Ahmad', 'Horyzat', '999'),
@@ -36,23 +36,23 @@ export class RestaurantService {
   customer_id = localStorage.getItem('customer_id');
   url = 'http://localhost:9000';
 
-  private adminList= ['Ahmad'];
+  private adminList = ['Ahmad'];
 
   constructor(private http: HttpClient,) { }
 
-  getStudent():Observable<Object> {
+  getStudent(): Observable<Object> {
     return this.http.get(this.url);
   }
 
   getRestaurants(): Observable<Object> {
-  //   var headers_object = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     'Authorization': "Bearer " + t)
-  // });
+    //   var headers_object = new HttpHeaders({
+    //     'Content-Type': 'application/json',
+    //     'Authorization': "Bearer " + t)
+    // });
 
-  // const httpOptions = {
-  //   headers: headers_object
-  // };
+    // const httpOptions = {
+    //   headers: headers_object
+    // };
     const httpOptions = {
       headers: new HttpHeaders({
         "Authorization": localStorage.getItem('token')
@@ -73,6 +73,7 @@ export class RestaurantService {
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
+        "Authorization": localStorage.getItem('token')
       })
     }
     let body = {
@@ -87,10 +88,11 @@ export class RestaurantService {
     // this.restaurants.push(restaurant);
   }
 
-  addMenu(menu: Menu):Observable<Object> {
+  addMenu(menu: Menu): Observable<Object> {
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
+        "Authorization": localStorage.getItem('token')
       })
     }
 
@@ -102,21 +104,32 @@ export class RestaurantService {
       "image": menu.image
     }
     return this.http.post('http://localhost:9000/menus', body, httpOptions);
-    
   }
 
-  deleteMenu(menu: Menu):Observable<Object> {
+  deleteMenu(menu: Menu): Observable<Object> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Authorization": localStorage.getItem('token')
+      })
+    };
     return this.http.delete("http://localhost:9000/menus/" + menu.id);
+
   }
 
   deleteRestaurant(restaurant: Restaurant) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Authorization": localStorage.getItem('token')
+      })
+    };
     return this.http.delete("http://localhost:9000/restaurants/" + restaurant.id);
   }
 
-  editRestaurant(restaurant: Restaurant):Observable<Object> {
+  editRestaurant(restaurant: Restaurant): Observable<Object> {
     const httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem('token')
       })
     }
     let body = {
@@ -133,7 +146,8 @@ export class RestaurantService {
   editMenu(menu: Menu) {
     const httpOptions = {
       headers: new HttpHeaders({
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem('token')
       })
     }
     let body = {
@@ -146,7 +160,7 @@ export class RestaurantService {
     return this.http.put('http://localhost:9000/menus/' + menu.id, body, httpOptions);
   }
 
-  getOrdersByCustomer(customer_id:string):Observable<Object> {
+  getOrdersByCustomer(customer_id: string): Observable<Object> {
     const httpOptions = {
       headers: new HttpHeaders({
         "Authorization": localStorage.getItem('token')
@@ -155,7 +169,7 @@ export class RestaurantService {
     return this.http.get(this.url + '/orders/byCustomer/' + customer_id, httpOptions);
   }
 
-  orderItem(order:Orders):Observable<Object> {
+  orderItem(order: Orders): Observable<Object> {
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
@@ -172,11 +186,11 @@ export class RestaurantService {
     return this.http.post(this.url + '/orders/', body, httpOptions);
   }
 
-  deleteOrder(order: Orders):Observable<Object> {
+  deleteOrder(order: Orders): Observable<Object> {
     return this.http.delete(this.url + '/orders/' + order.id);
   }
 
-  getOrdersByRestId(rest_id: string):Observable<Object> {
+  getOrdersByRestId(rest_id: string): Observable<Object> {
     const httpOptions = {
       headers: new HttpHeaders({
         "Authorization": localStorage.getItem('token')
@@ -185,12 +199,12 @@ export class RestaurantService {
     return this.http.get(this.url + '/orders/' + rest_id, httpOptions);
   }
 
-  getRatingsByRest_Id(rest_id: string):Observable<Object> {
+  getRatingsByRest_Id(rest_id: string): Observable<Object> {
     return this.http.get(this.url + '/restRatig/' + rest_id);
     // return this.ratingList.filter((element) => element.rest_id == rest_id);
   }
 
-  addRating(rate: RestaurantRating):Observable<Object> {
+  addRating(rate: RestaurantRating): Observable<Object> {
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
@@ -207,14 +221,14 @@ export class RestaurantService {
     // this.ratingList.push(rate);
   }
 
-  login(username:string, password:string) {
+  login(username: string, password: string) {
 
     // let header = new HttpHeaders().set("Authorization", localStorage.getItem('token'));
 
-    let body = { 
+    let body = {
       "username": username,
       "password": password
-      
+
     }
     const httpOptions = {
       headers: new HttpHeaders({
@@ -224,7 +238,7 @@ export class RestaurantService {
     return this.http.post(this.url + '/users/login', body, httpOptions)
   }
 
-  register(customer:Customer) {
+  register(customer: Customer) {
 
     // let header = new HttpHeaders().set("Authorization", localStorage.getItem('token'));
 
@@ -255,21 +269,21 @@ export class RestaurantService {
     return this.customers;
   }
 
-  getAdminList():string[] {
+  getAdminList(): string[] {
     return this.adminList;
   }
 
-  
+
 
   // getRatings(): RestaurantRating[] {
   //   return this.ratingList;
   // }
 
-  
 
-  
 
-  
+
+
+
   // getOrders(): Orders[] {
   //   return this.ordersList;
   // }
@@ -283,10 +297,10 @@ export class RestaurantService {
   //     }
   //   }
   //   return false;
-    
+
   // }
 
-  
+
 
   // getRestName(rest_id:string):string{
   //   return this.restaurants.filter((rest) => rest.id == rest_id)[0].name;
@@ -310,7 +324,7 @@ export class RestaurantService {
   //   console.log(this.menus[index].rating);
   // }
 
-  
+
 
   // filterRest(method:string):Restaurant[] {
   //   method = method.toLowerCase();
@@ -319,7 +333,7 @@ export class RestaurantService {
   //   }
   //   if (method == 'city') {
   //     return this.restaurants.sort((a, b) => (a.city > b.city) ? 1 : -1);
-    
+
   //   }
   //   else {
   //     return this.restaurants.sort((a, b) => (a.name > b.name) ? 1 : -1);
@@ -344,5 +358,5 @@ export class RestaurantService {
   // getMenuOfOrder(order:Orders) {
   //   return this.menus.filter((menu) => (menu.rest_id == order.rest_id) && (menu.id == order.menu_id))[0];
   // }
-    
+
 }
