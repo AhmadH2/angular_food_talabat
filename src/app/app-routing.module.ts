@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AddMenuFormComponent } from './add-menu-form/add-menu-form.component';
-import { AddRestaurantFormComponent } from './add-restaurant-form/add-restaurant-form.component';
-import { LoginComponent } from './login/login.component';
-import { MenusListComponent } from './menus-list/menus-list.component';
-import { OrderedListComponent } from './ordered-list/ordered-list.component';
-import { OrderedMenuItemsComponent } from './ordered-menu-items/ordered-menu-items.component';
-import { RegisterComponent } from './register/register.component';
-import { RestaurantsListComponent } from './restaurants-list/restaurants-list.component';
+import { AddMenuFormComponent } from './components/add-menu-form/add-menu-form.component';
+import { AddRestaurantFormComponent } from './components/add-restaurant-form/add-restaurant-form.component';
+import { LoginComponent } from './components/login/login.component';
+import { MenusListComponent } from './components/menus-list/menus-list.component';
+import { OrderedListComponent } from './components/ordered-list/ordered-list.component';
+import { OrderedMenuItemsComponent } from './components/ordered-menu-items/ordered-menu-items.component';
+import { RegisterComponent } from './components/register/register.component';
+import { RestaurantsListComponent } from './components/restaurants-list/restaurants-list.component';
 import { AuthGuardService as authGuard } from './services/auth-guard.service'
 import { AdminAuthGuardService as adminGuard} from './services/admin-auth-guard.service'
 

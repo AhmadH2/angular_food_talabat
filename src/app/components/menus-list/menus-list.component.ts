@@ -1,10 +1,10 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Menu } from '../models/menu';
-import { RestaurantService } from '../services/restaurant.service';
+import { Menu } from '../../models/menu';
+import { RestaurantService } from '../../services/restaurant.service';
 import { Location } from '@angular/common';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-menus-list',

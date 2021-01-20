@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Menu } from '../models/menu';
-import { Restaurant } from '../models/restaurant';
-import { RestaurantService } from '../services/restaurant.service';
+import { Menu } from '../../models/menu';
+import { Restaurant } from '../../models/restaurant';
+import { RestaurantService } from '../../services/restaurant.service';
 
 @Component({
   selector: 'app-edit-menu',

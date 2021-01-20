@@ -9,8 +9,8 @@ import { Customer } from '../models/customer';
 export class AuthService {
 
   constructor(private http: HttpClient, private router:Router) { }
-  // url = 'https://talabat-backend.herokuapp.com';
-  private url = 'http://localhost:9000'
+  url = 'https://talabat-backend.herokuapp.com';
+  // private url = 'http://localhost:9000'
 
   getUrl():string {
     return this.url;

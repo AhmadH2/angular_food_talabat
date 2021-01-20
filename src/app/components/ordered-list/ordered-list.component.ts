@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Menu } from '../models/menu';
-import { RestaurantService } from '../services/restaurant.service';
+import { Menu } from '../../models/menu';
+import { RestaurantService } from '../../services/restaurant.service';
 import { Location } from '@angular/common';
-import { Orders } from '../models/orders';
-import { RestaurantRating } from '../models/restaurant-rating';
-import { Restaurant } from '../models/restaurant';
+import { Orders } from '../../models/orders';
+import { RestaurantRating } from '../../models/restaurant-rating';
+import { Restaurant } from '../../models/restaurant';
 
 @Component({
   selector: 'app-ordered-list',

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
-import { RestaurantService } from '../services/restaurant.service';
+import { AuthService } from '../../services/auth.service';
+import { RestaurantService } from '../../services/restaurant.service';
 
 
 

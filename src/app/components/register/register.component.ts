@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Customer } from '../models/customer';
-import { AuthService } from '../services/auth.service';
-import { RestaurantService } from '../services/restaurant.service';
+import { Customer } from '../../models/customer';
+import { AuthService } from '../../services/auth.service';
+import { RestaurantService } from '../../services/restaurant.service';
 
 @Component({
   selector: 'app-register',

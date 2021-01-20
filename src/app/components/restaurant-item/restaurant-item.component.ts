@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Restaurant } from '../models/restaurant';
-import { RestaurantService } from '../services/restaurant.service';
+import { Restaurant } from '../../models/restaurant';
+import { RestaurantService } from '../../services/restaurant.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { RestaurantRating } from '../models/restaurant-rating';
+import { RestaurantRating } from '../../models/restaurant-rating';
 import { element } from 'protractor';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-restaurant-item',
