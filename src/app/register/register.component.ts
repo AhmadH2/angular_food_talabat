@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Customer } from '../customer';
-import { RestaurantService } from '../restaurant.service';
+import { Customer } from '../models/customer';
+import { AuthService } from '../services/auth.service';
+import { RestaurantService } from '../services/restaurant.service';
 
 @Component({
   selector: 'app-register',
@@ -11,12 +12,12 @@ export class RegisterComponent implements OnInit {
 
   customer: Customer = new Customer('', '', '', '');
 
-  constructor(private restaurantService: RestaurantService) { }
+  constructor(private restaurantService: RestaurantService, private authService: AuthService) { }
 
   ngOnInit(): void {
   }
   onSubmit() {
-    this.restaurantService.register(this.customer).subscribe();
+    this.authService.register(this.customer).subscribe();
     this.customer = new Customer('', '', '', '');
   }
 

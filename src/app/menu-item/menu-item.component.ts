@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { Menu } from '../menu';
-import { Orders } from '../orders';
-import { Restaurant } from '../restaurant';
-import { RestaurantService } from '../restaurant.service';
+import { Menu } from '../models/menu';
+import { Orders } from '../models/orders';
+import { Restaurant } from '../models/restaurant';
+import { RestaurantService } from '../services/restaurant.service';
 
 @Component({
   selector: 'app-menu-item',

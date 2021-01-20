@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RestaurantService } from '../restaurant.service';
+import { RestaurantService } from '../services/restaurant.service';
 import {Location} from '@angular/common';
-import { Orders } from '../orders';
+import { Orders } from '../models/orders';
 
 @Component({
   selector: 'app-ordered-menu-items',

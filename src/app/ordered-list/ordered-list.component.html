@@ -1,16 +1,7 @@
 
 
 <div class="container">
-
-    <div class="form-group">
-        <label for="restaurant">Restaurant</label>
-        <!-- (change)="filter($event.target.value)" -->
-        <select  name="restaurant" id="restaurant">
-            <option value="" *ngFor="let restaurant of restaurants" [value]="restaurant.id">{{restaurant.name}}</option>
-        </select>
-    
-    </div>
-
+    <br>
     <h2>Total Price to Pay: ${{calcPrice()}}</h2>
 
     <button class="btn btn-outline-success" (click)="goBack()">Go back</button>

@@ -8,14 +8,16 @@ import { OrderedListComponent } from './ordered-list/ordered-list.component';
 import { OrderedMenuItemsComponent } from './ordered-menu-items/ordered-menu-items.component';
 import { RegisterComponent } from './register/register.component';
 import { RestaurantsListComponent } from './restaurants-list/restaurants-list.component';
+import { AuthGuardService as authGuard } from './services/auth-guard.service'
+import { AdminAuthGuardService as adminGuard} from './services/admin-auth-guard.service'
 
 const routes: Routes = [
-  { path: "restaurants/menus/:id", component:MenusListComponent},
-  { path: 'restaurants', component: RestaurantsListComponent },
-  { path: 'addRest', component: AddRestaurantFormComponent },
-  { path: 'addMenu', component: AddMenuFormComponent },
-  { path: 'orders', component: OrderedListComponent },
-  { path: 'ordersMenu/:rest_id', component: OrderedMenuItemsComponent },
+  { path: "restaurants/menus/:id", component: MenusListComponent, canActivate: [authGuard]},
+  { path: 'restaurants', component: RestaurantsListComponent, canActivate: [authGuard] },
+  { path: 'addRest', component: AddRestaurantFormComponent, canActivate: [authGuard, adminGuard] },
+  { path: 'addMenu', component: AddMenuFormComponent, canActivate: [authGuard, adminGuard] },
+  { path: 'orders', component: OrderedListComponent, canActivate: [authGuard] },
+  { path: 'ordersMenu/:rest_id', component: OrderedMenuItemsComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent}
 

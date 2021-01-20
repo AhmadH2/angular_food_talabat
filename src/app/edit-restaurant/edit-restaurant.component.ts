@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { Restaurant } from '../restaurant';
-import { RestaurantService } from '../restaurant.service';
+import { Restaurant } from '../models/restaurant';
+import { RestaurantService } from '../services/restaurant.service';
 
 @Component({
   selector: 'app-edit-restaurant',

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Customer } from '../customer';
+import { Customer } from '../models/customer';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,12 @@ import { Customer } from '../customer';
 export class AuthService {
 
   constructor(private http: HttpClient, private router:Router) { }
-  url = "http://localhost:9000";
+  // url = 'https://talabat-backend.herokuapp.com';
+  private url = 'http://localhost:9000'
+
+  getUrl():string {
+    return this.url;
+  }
 
   login(username: string, password: string) {
 

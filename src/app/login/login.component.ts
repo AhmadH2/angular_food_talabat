@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RestaurantService } from '../restaurant.service';
+import { AuthService } from '../services/auth.service';
+import { RestaurantService } from '../services/restaurant.service';
 
 
 
@@ -14,69 +16,47 @@ export class LoginComponent implements OnInit {
 
   isAdmin:boolean;
   body:any;
-  message:string ='init';
+  errMessage:string ='';
+  usern: string = '';
+  pswrd: string = '';
+  loginForm: any;
 
-  constructor(private restaurantService: RestaurantService, private router: Router) { }
+  constructor(private restaurantService: RestaurantService, private router: Router,
+    private authService:AuthService) { }
 
   ngOnInit() {
-    this.isAdmin = this.restaurantService.isAdmin;
+    this.loginForm = new FormGroup({
+      username: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
+    });
+    this.isAdmin = this.authService.isAdmin();
   }
 
+  get username() { return this.loginForm.get('username'); }
+  get password() { return this.loginForm.get('password'); }
 
-  onSubmit() {
-    // this.restaurantService.login(f.value.username, f.value.password).subscribe(
-    //   response => {
-    //     this.body = response
-    //     if (this.body.name) {
-    //       localStorage.setItem("token", this.body.token)
-    //       this.router.navigate(['/students'])
-    //     }
-    //     else {
-    //       this.message = "Access Denide, Invalid username or password"
-    //     }
-
-    //   }
-    // )
-  }
 
   login(username:string, password:string) {
-    this.restaurantService.login(username, password).subscribe(
+    this.authService.login(username, password).subscribe(
       response => {
-        console.log('this is the response' + response);
-        this.body = response
+        this.body = response;
         if (this.body.username) {
           localStorage.setItem("token", this.body.token)
-          console.log('tokents ' + localStorage.getItem('token'));
-          this.restaurantService.isAdmin = this.body.isAdmin;
           localStorage.setItem('isAdmin', this.body.isAdmin);
           localStorage.setItem('customer_id', this.body._id);
-          console.log('customer id' + localStorage.getItem('customer_id'));
-          this.router.navigate(['/restaurants'])
+          localStorage.setItem('isLoggedin', 'true');
+          this.errMessage = '';
+          this.router.navigate(['/restaurants']).then(() => window.location.reload());
         }
         else {
-          this.message = "Access Denide, Invalid username or password";
+          this.errMessage = "Access Denide, Invalid username or password";
           localStorage.setItem('token', 'invalid token');
+          localStorage.setItem('isLoggedin', 'false');
           localStorage.setItem('isAdmin', 'false');
         }
 
       }
     )
-
-    // let login = false;
-
-    // let cust = this.restaurantService.getCustomers().filter((custmer) => custmer.first_name == username);
-    
-    // login = cust.length > 0;
-    // if (login || true) {
-    //   if (true || this.restaurantService.getAdminList().filter((admin)=>admin==username).length > 0) {
-    //     this.restaurantService.isAdmin = true;
-    //     this.isAdmin = true;
-    //   }
-    //   this.loggedIn = true;
-    //   this.restaurantService.loggedIn = true;
-    //   this.restaurantService.customer_id = cust[0].id;
-    // }
-
     
 
   }

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddRestaurantFormComponent } from './add-restaurant-form/add-restaurant-form.component';
@@ -14,7 +14,6 @@ import { EditRestaurantComponent } from './edit-restaurant/edit-restaurant.compo
 import { EditMenuComponent } from './edit-menu/edit-menu.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { OrderedListComponent } from './ordered-list/ordered-list.component';
-import {AdminPanelComponent} from './admin-panel/admin-panel.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { OrderedItemComponent } from './ordered-item/ordered-item.component';
@@ -37,11 +36,10 @@ import { RegisterComponent } from './register/register.component';
     EditMenuComponent,
     NavBarComponent,
     OrderedListComponent,
-    AdminPanelComponent,
     OrderedItemComponent,
     LoginComponent,
     OrderedMenuItemsComponent,
-    RegisterComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +49,8 @@ import { RegisterComponent } from './register/register.component';
     BrowserAnimationsModule,
     ToastrModule,
     ToastrModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Restaurant } from '../restaurant';
-import { RestaurantService } from '../restaurant.service';
+import { Restaurant } from '../models/restaurant';
+import { RestaurantService } from '../services/restaurant.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { RestaurantRating } from '../restaurant-rating';
+import { RestaurantRating } from '../models/restaurant-rating';
 import { element } from 'protractor';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-restaurant-item',
@@ -24,7 +25,8 @@ export class RestaurantItemComponent implements OnInit {
   @Output()
   delete = new EventEmitter<any>();
 
-  constructor(public restaurantService: RestaurantService, private modalService: NgbModal) { }
+  constructor(public restaurantService: RestaurantService, private modalService: NgbModal,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.restaurantService.getRatingsByRest_Id(this.restaurant.id).subscribe(
@@ -44,9 +46,8 @@ export class RestaurantItemComponent implements OnInit {
       (err) => console.log(err) 
     );
 
-    
-    this.isAdmin = this.restaurantService.isAdmin;
-    console.log('is Admin' + this.isAdmin);
+    this.isAdmin = this.authService.isAdmin();
+
   }
 
   async deleteRest() {
@@ -65,23 +66,9 @@ export class RestaurantItemComponent implements OnInit {
 
   rate(rating:number) {
     let rate = new RestaurantRating('', this.restaurant.id, this.restaurantService.customer_id,
-     rating, '12/12/2020');
+     rating, Date.now().toString());
 
     this.restaurantService.addRating(rate).subscribe();
-
-    // let rat:number = 0.0;
-    // // let restsRating = this.restaurantService.getr(this.restaurant.id);
-
-    // for(let i=0; i<this.restRatings.length; i++) {
-      
-    //   rat = Math.round(rat) + Math.round(this.restRatings[i].rating);
-    // }
-
-    // rat = rat / this.restRatings.length;
-    // this.rating = [];
-    // for (let i = 0; i < rat; i++) {
-    //   this.rating.push(i);
-    // }
 
 
     this.modalService.dismissAll();

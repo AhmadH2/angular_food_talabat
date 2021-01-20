@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Menu } from '../menu';
-import { RestaurantService } from '../restaurant.service';
+import { Menu } from '../models/menu';
+import { RestaurantService } from '../services/restaurant.service';
 import { Location } from '@angular/common';
-import { Orders } from '../orders';
-import { RestaurantRating } from '../restaurant-rating';
-import { Restaurant } from '../restaurant';
+import { Orders } from '../models/orders';
+import { RestaurantRating } from '../models/restaurant-rating';
+import { Restaurant } from '../models/restaurant';
 
 @Component({
   selector: 'app-ordered-list',
@@ -43,9 +43,6 @@ export class OrderedListComponent implements OnInit {
   delete(order:Orders) {
     let index = this.orders.indexOf(order);
     this.orders.splice(index, 1);
-    // this.restaurantService.getOrdersByCustomer(this.restaurantService.customer_id).subscribe(
-    //   (orders: Orders[]) => this.orders = orders,
-    // );
   }
 
   getMenuOfOrder(order):Menu {
@@ -60,7 +57,4 @@ export class OrderedListComponent implements OnInit {
     return total;
   }
 
-  // filter(value) {
-  //   this.orders = this.restaurantService.getOrdersByRestId(value);
-  // }
 }

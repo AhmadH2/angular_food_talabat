@@ -2,41 +2,24 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Customer } from '../customer';
-import { Menu } from '../menu';
-import { Orders } from '../orders';
-import { Restaurant } from '../restaurant';
-import { RestaurantRating } from '../restaurant-rating';
-import { Student } from '../student';
+import { Customer } from '../models/customer';
+import { Menu } from '../models/menu';
+import { Orders } from '../models/orders';
+import { Restaurant } from '../models/restaurant';
+import { RestaurantRating } from '../models/restaurant-rating';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestaurantService {
 
-  private restaurants: Restaurant[];
-  private menus: Menu[];
-
-
-  //fetch them from server by custom id
-  private ordersList: Orders[] = [
-    new Orders('k', 'k', 'k', 'k', 2, '2020/3/3'),
-  ];
-
-  private ratingList: RestaurantRating[] = [];
-
-
   customer_id = localStorage.getItem('customer_id');
-  // url = 'https://talabat-backend.herokuapp.com';
-  url = 'http://localhost:9000'
+  
+  url = this.authService.getUrl();
 
-  private adminList = ['Ahmad'];
 
-  constructor(private http: HttpClient, private router:Router) { }
-
-  getStudent(): Observable<Object> {
-    return this.http.get(this.url);
-  }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
   getRestaurants(): Observable<Object> {
 
@@ -72,7 +55,6 @@ export class RestaurantService {
       "image": restaurant.image
     }
     return this.http.post(this.url + '/restaurants', body, httpOptions);
-    // this.restaurants.push(restaurant);
   }
 
   addMenu(menu: Menu): Observable<Object> {
@@ -188,7 +170,6 @@ export class RestaurantService {
 
   getRatingsByRest_Id(rest_id: string): Observable<Object> {
     return this.http.get(this.url + '/restRatig/' + rest_id);
-    // return this.ratingList.filter((element) => element.rest_id == rest_id);
   }
 
   addRating(rate: RestaurantRating): Observable<Object> {
@@ -205,107 +186,6 @@ export class RestaurantService {
       "date_rated": rate.date_rated,
     }
     return this.http.post(this.url + '/restRatig/', body, httpOptions);
-    // this.ratingList.push(rate);
   }
-
-
-
-
-
-
-  // getLogInf(){
-  //   return this.loggedIn;
-  // }
-
-
-  getAdminList(): string[] {
-    return this.adminList;
-  }
-
-
-
-  // getRatings(): RestaurantRating[] {
-  //   return this.ratingList;
-  // }
-
-
-
-
-
-
-  // getOrders(): Orders[] {
-  //   return this.ordersList;
-  // }
-
-
-  // isOrdered(menu: Menu): boolean {
-
-  //   for (let i = 0; i < this.ordersList.length; i++) {
-  //     if ((menu.id == this.ordersList[i].menu_id) && (menu.rest_id == this.ordersList[i].rest_id)) {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-
-  // }
-
-
-
-  // getRestName(rest_id:string):string{
-  //   return this.restaurants.filter((rest) => rest.id == rest_id)[0].name;
-  // }
-
-
-  // // getMenus(): Menu[] {
-  // //   return this.menus.sort((a, b) => (a.name < b.name)?1:-1);
-  // // }
-
-
-  // rateRestaurant(rating:number, restaurant:Restaurant) {
-  //   let index = this.restaurants.indexOf(restaurant);
-  //   this.restaurants[index].rating = rating;
-  //   console.log(this.restaurants[index].rating);
-  // }
-
-  // rateMenu(rating:number, menu:Menu) {
-  //   let index = this.menus.indexOf(menu);
-  //   this.menus[index].rating = rating;
-  //   console.log(this.menus[index].rating);
-  // }
-
-
-
-  // filterRest(method:string):Restaurant[] {
-  //   method = method.toLowerCase();
-  //   if(method == 'rating') {
-  //     return this.restaurants.sort((a, b) => (a.rating < b.rating) ? 1 : -1);
-  //   }
-  //   if (method == 'city') {
-  //     return this.restaurants.sort((a, b) => (a.city > b.city) ? 1 : -1);
-
-  //   }
-  //   else {
-  //     return this.restaurants.sort((a, b) => (a.name > b.name) ? 1 : -1);
-  //   }
-  // }
-
-  // filterMenus(method:string):Menu[] {
-  //   method = method.toLowerCase();
-  //   if (method == 'rating') {
-  //     return this.menus.sort((a, b) => (a.rating < b.rating) ? 1 : -1);
-  //   }
-  //   else {
-  //     return this.menus.sort((a, b) => (a.name > b.name) ? 1 : -1);
-  //   }
-
-  // }
-
-  // getMenuItem(rest_id: string, menu_id: string):Menu {
-  //   return this.menus.filter((menu) => (menu.rest_id==rest_id) && (menu.id==menu_id))[0];
-  // }
-
-  // getMenuOfOrder(order:Orders) {
-  //   return this.menus.filter((menu) => (menu.rest_id == order.rest_id) && (menu.id == order.menu_id))[0];
-  // }
 
 }

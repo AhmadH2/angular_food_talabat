@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Menu } from '../menu';
-import { Restaurant } from '../restaurant';
-import { RestaurantService } from '../restaurant.service';
+import { Menu } from '../models/menu';
+import { Restaurant } from '../models/restaurant';
+import { RestaurantService } from '../services/restaurant.service';
 
 @Component({
   selector: 'app-add-menu-form',

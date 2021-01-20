@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Menu } from '../menu';
-import { Orders } from '../orders';
-import { RestaurantService } from '../restaurant.service';
+import { Menu } from '../models/menu';
+import { Orders } from '../models/orders';
+import { RestaurantService } from '../services/restaurant.service';
 import {Location} from '@angular/common'
 import { ToastrService } from 'ngx-toastr';
-import { Restaurant } from '../restaurant';
+import { Restaurant } from '../models/restaurant';
 
 @Component({
   selector: 'app-ordered-item',

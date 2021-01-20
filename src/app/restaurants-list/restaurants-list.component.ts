@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Restaurant } from '../restaurant';
-import { RestaurantService } from '../restaurant.service';
-import { Student } from '../student';
+import { Restaurant } from '../models/restaurant';
+import { RestaurantService } from '../services/restaurant.service';
 
 @Component({
   selector: 'app-restaurants-list',
@@ -18,18 +17,10 @@ export class RestaurantsListComponent implements OnInit {
   constructor(public restaurantService: RestaurantService) { }
 
   ngOnInit(): void {
-    // this.restaurants = this.restaurantService.getRestaurants();
     this.restaurantService.getRestaurants().subscribe(
       (rest:Restaurant[]) => {
         this.restaurants = rest.sort((a, b) => (a.name > b.name) ? 1 : -1);
       },
-    );
-    this.restaurantService.getStudent().subscribe(
-      (a) => {
-        console.log(JSON.stringify(a));
-        this.student = JSON.stringify(a);
-      },
-      (err) => console.log(err)
     );
     this.isAdmin = localStorage.getItem('isAdmin') == 'true';
   }

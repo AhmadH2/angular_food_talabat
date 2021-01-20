@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { RestaurantService } from './restaurant.service';
-import { Student } from './student';
+import { RestaurantService } from './services/restaurant.service';
 
 
 @Component({
@@ -10,17 +9,12 @@ import { Student } from './student';
 })
 export class AppComponent {
 
-  arr: any;
-  student:Student;
 
-  constructor(private restaurantService:RestaurantService) { 
+  constructor() { 
     
   };
 
   ngOnInit(): void {  
-    this.arr = this.restaurantService.getStudent().subscribe(
-      (a) => this.student = a,
-    ) 
   };
   title = 'Talabat';
 }
