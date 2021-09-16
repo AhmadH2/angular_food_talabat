@@ -3,7 +3,7 @@
     <div class="card-body">
         <form [formGroup]="loginForm">
             <div class="form-group">
-                <label>User name /Ahmad:admin, Ali:user</label>
+                <label>User name Ali</label>
                 <input class="form-control" type="text" formControlName='username' [(ngModel)]='usern' name="username">
                 <div *ngIf="username.touched && username.invalid" class="alert alert-danger">This field is required</div>
             </div>
