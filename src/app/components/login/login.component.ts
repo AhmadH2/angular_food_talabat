@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   usern: string = '';
   pswrd: string = '';
   loginForm: any;
+  loading: boolean = false;
 
   constructor(private restaurantService: RestaurantService, private router: Router,
     private authService:AuthService) { }
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
 
 
   login(username:string, password:string) {
+    this.loading = true;
     this.authService.login(username, password).subscribe(
       response => {
         this.body = response;
@@ -53,6 +55,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', 'invalid token');
           localStorage.setItem('isLoggedin', 'false');
           localStorage.setItem('isAdmin', 'false');
+          this.loading = false;
         }
 
       }

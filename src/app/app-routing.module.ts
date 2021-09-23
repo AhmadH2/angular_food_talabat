@@ -1,3 +1,4 @@
+import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AddMenuFormComponent } from './components/add-menu-form/add-menu-form.component';
@@ -19,9 +20,8 @@ const routes: Routes = [
   { path: 'orders', component: OrderedListComponent, canActivate: [authGuard] },
   { path: 'ordersMenu/:rest_id', component: OrderedMenuItemsComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent}
-
-
+  { path: 'register', component: RegisterComponent,},
+  { path: '', component: HomeComponent }
 ];
 
 @NgModule({
